@@ -1971,7 +1971,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8c10936808a20d4997c9c12762172ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorChangeMenu: {fileID: 1626517354}
+  menu: {fileID: 1626517354}
 --- !u!4 &1179915451
 Transform:
   m_ObjectHideFlags: 0
