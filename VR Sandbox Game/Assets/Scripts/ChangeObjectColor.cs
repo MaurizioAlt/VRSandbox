@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class ChangeObjectColor : MonoBehaviour
 {
-    public GameObject colorChangeMenu;
+    public GameObject menu;
     public static GameObject selectedGameObject;
 
     void Update()
@@ -39,8 +39,7 @@ public class ChangeObjectColor : MonoBehaviour
 
     public void showColorMenu() 
     { 
-        //setColor(nextColor());
-        colorChangeMenu.SetActive(true);
+        menu.SetActive(true);
     }
 
     public void setColor(int i)
@@ -55,6 +54,6 @@ public class ChangeObjectColor : MonoBehaviour
 
     public void ExistColorChangeMenu()
     {
-        colorChangeMenu.SetActive(false);
+        menu.SetActive(false);
     }
 }

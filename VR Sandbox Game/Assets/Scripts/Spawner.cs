@@ -5,6 +5,8 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     public GameObject[] spawnObjects;
+    
+    // forward spawning distance based on camera
     public int forwardDistance = 5;
 
     public void spawn(int i)

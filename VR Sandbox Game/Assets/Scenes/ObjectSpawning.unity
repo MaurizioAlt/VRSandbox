@@ -757,6 +757,7 @@ GameObject:
   m_Component:
   - component: {fileID: 237811036}
   - component: {fileID: 237811035}
+  - component: {fileID: 237811037}
   m_Layer: 0
   m_Name: ObjectList
   m_TagString: Untagged
@@ -790,6 +791,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &237811037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 237811034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 086ec8180f2f43e42bf87113dc1fb728, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Notes: contains the prefabs names for change object color script
 --- !u!1 &355264611
 GameObject:
   m_ObjectHideFlags: 0
@@ -832,7 +846,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &355264614
 MonoBehaviour:
@@ -1908,7 +1922,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 086ec8180f2f43e42bf87113dc1fb728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Notes: 'The '
+  Notes: the poles at corners are for lcoatin reference during game
 --- !u!4 &1150726910
 Transform:
   m_ObjectHideFlags: 0
@@ -2114,7 +2128,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1268799731
 MonoBehaviour:
@@ -2128,7 +2142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 086ec8180f2f43e42bf87113dc1fb728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Notes: Comment Here.
+  Notes: Call Spawners on button clicks
 --- !u!1 &1276265271
 GameObject:
   m_ObjectHideFlags: 0
@@ -2193,7 +2207,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1338688772
 GameObject:
@@ -2705,7 +2719,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 79674db77adfc4d6f9f17fb043493b1e, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 79674db77adfc4d6f9f17fb043493b1e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3490,7 +3504,7 @@ RectTransform:
   - {fileID: 1729697491}
   - {fileID: 1626517355}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
