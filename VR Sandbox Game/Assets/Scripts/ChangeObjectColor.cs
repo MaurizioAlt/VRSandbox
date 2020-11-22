@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ChangeObjectColor : MonoBehaviour
 {
@@ -14,9 +15,11 @@ public class ChangeObjectColor : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay( Input.mousePosition );
             RaycastHit hit;
             
-            if( Physics.Raycast( ray, out hit, 100 ) )
+            // check if clicked on an object directly
+            if( Physics.Raycast(ray, out hit, 100) && !EventSystem.current.IsPointerOverGameObject())
             {
-                Debug.Log( hit.transform.gameObject.name );
+                // Debug.Log( hit.transform.gameObject.name );
+                // if clicked on one of the prefab objects, set the current object to the most recent clicked one
                 if(ObjectList.objects.Contains(hit.transform.gameObject.name)) 
                 {
                     selectedGameObject = hit.transform.gameObject;
