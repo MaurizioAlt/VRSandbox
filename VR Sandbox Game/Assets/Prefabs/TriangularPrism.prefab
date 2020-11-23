@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 3253877907303384076}
   - component: {fileID: 370840115517985861}
   - component: {fileID: 2623980579891716042}
-  - component: {fileID: 8618575110817332972}
   m_Layer: 0
   m_Name: TriangularPrism
   m_TagString: Untagged
@@ -275,15 +274,3 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
---- !u!114 &8618575110817332972
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3909017972738044975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8c10936808a20d4997c9c12762172ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
