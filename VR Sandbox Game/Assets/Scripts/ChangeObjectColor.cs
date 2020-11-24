@@ -7,7 +7,7 @@ public class ChangeObjectColor : MonoBehaviour
 {
     public GameObject menu;
     public static GameObject selectedGameObject;
-
+    public Color[] colors;
     void Update()
     {
         if( Input.GetMouseButtonDown(0) )
@@ -29,13 +29,6 @@ public class ChangeObjectColor : MonoBehaviour
             }
         }
     }
-
-    private Color[] colors = {Color.red,            // #FFFF0000    0
-                                Color.yellow,       // #FFFFFF00    1
-                                Color.blue,         // #FF0000FF    2
-                                Color.green,        // #FF008000    3
-                                Color.cyan,         // #FF00FFFF    4
-                                Color.white};       // #FFFFFFFF    5
 
     public void showColorMenu() 
     { 
