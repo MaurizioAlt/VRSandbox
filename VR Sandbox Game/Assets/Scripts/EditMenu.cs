@@ -30,8 +30,10 @@ public class EditMenu : MonoBehaviour
                 {
                     selectedGameObject = hit.transform.gameObject;
                     Debug.Log("Hooray" + selectedGameObject.name);
-                    EnterEditMenu();
                 }
+
+                if(!colormenu.activeInHierarchy && !positionmenu.activeInHierarchy)
+                    EnterEditMenu();
             }
         }
     }
