@@ -8,7 +8,7 @@ public class EditMenu : MonoBehaviour
     public GameObject editmenu;
     public GameObject colormenu;
     public GameObject positionmenu;
-    public GameObject rotationmenu;
+    public GameObject rotatemenu;
     public GameObject resizemenu;
 
     public static GameObject selectedGameObject;
@@ -32,7 +32,7 @@ public class EditMenu : MonoBehaviour
                     Debug.Log("Hooray" + selectedGameObject.name);
                 }
 
-                if(!colormenu.activeInHierarchy && !positionmenu.activeInHierarchy)
+                if(!colormenu.activeInHierarchy && !positionmenu.activeInHierarchy && !rotatemenu.activeInHierarchy)
                     EnterEditMenu();
             }
         }
@@ -72,4 +72,17 @@ public class EditMenu : MonoBehaviour
         editmenu.SetActive(true);
         positionmenu.SetActive(false);
     }
+
+    public void SwitchEditToRotate()
+    {
+        editmenu.SetActive(false);
+        rotatemenu.SetActive(true);
+    }
+
+    public void SwitchRotateToEdit()
+    {
+        editmenu.SetActive(true);
+        rotatemenu.SetActive(false);
+    }
+
 }

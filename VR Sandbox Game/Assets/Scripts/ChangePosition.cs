@@ -41,4 +41,29 @@ public class ChangePosition : MonoBehaviour
     {
         menu.SetActive(false);
     }
+
+    public void rotatePositiveX()
+    {
+        EditMenu.selectedGameObject.transform.Rotate(45f, 0f, 0f);
+    }
+    public void rotateNegativeX()
+    {
+        EditMenu.selectedGameObject.transform.Rotate(-45f, 0f, 0f);
+    }
+    public void rotatePositiveY()
+    {
+        EditMenu.selectedGameObject.transform.Rotate(0f, 45f, 0f);
+    }
+    public void rotateNegativeY()
+    {
+        EditMenu.selectedGameObject.transform.Rotate(0f, -45f, 0f);
+    }
+    public void rotatePositiveZ()
+    {
+        EditMenu.selectedGameObject.transform.Rotate(0f, 0f, 45f);
+    }
+    public void rotateNegativeZ()
+    {
+        EditMenu.selectedGameObject.transform.Rotate(0f, 0f, -45f);
+    }
 }
