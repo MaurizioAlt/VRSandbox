@@ -38,6 +38,10 @@ public class EditMenu : MonoBehaviour
         }
     }
 
+    public void despawn()
+    {
+        Destroy(selectedGameObject);
+    }
 
     public void EnterEditMenu()
     {
