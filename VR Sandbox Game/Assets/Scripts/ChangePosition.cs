@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class ChangePosition : MonoBehaviour
+public class ChangePosition : MonoBehaviour, IPointerUpHandler
 {
     public GameObject menu;
+    public Slider slider;
 
     public void showPositionMenu()
     {
@@ -65,5 +67,23 @@ public class ChangePosition : MonoBehaviour
     public void rotateNegativeZ()
     {
         EditMenu.selectedGameObject.transform.Rotate(0f, 0f, -45f);
+    }
+
+
+    float oldValue;
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        if (slider.value != oldValue)
+        {
+            Debug.Log("Slider value changed from " + oldValue + " to " + slider.value);
+            oldValue = slider.value;
+        }
+    }
+
+    public void sliderincreasePositionX()
+    {
+        oldValue = slider.value;
+        EditMenu.selectedGameObject.transform.position += new Vector3(slider.value, 0, 0);
+        slider.value = 0;
     }
 }
