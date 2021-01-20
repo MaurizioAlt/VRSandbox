@@ -32,7 +32,7 @@ public class EditMenu : MonoBehaviour
                     Debug.Log("Hooray" + selectedGameObject.name);
                 }
 
-                if(!colormenu.activeInHierarchy && !positionmenu.activeInHierarchy && !rotatemenu.activeInHierarchy)
+                if(!colormenu.activeInHierarchy && !positionmenu.activeInHierarchy && !rotatemenu.activeInHierarchy && !resizemenu.activeInHierarchy)
                     EnterEditMenu();
             }
         }
@@ -85,4 +85,15 @@ public class EditMenu : MonoBehaviour
         rotatemenu.SetActive(false);
     }
 
+    public void SwitchEditToSize()
+    {
+        editmenu.SetActive(false);
+        resizemenu.SetActive(true);
+    }
+
+    public void SwitchSizeToEdit()
+    {
+        editmenu.SetActive(true);
+        resizemenu.SetActive(false);
+    }
 }
