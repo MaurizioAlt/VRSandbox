@@ -170,7 +170,7 @@ namespace Valve.VR
                             return;
                         case 2: //no, don't ask
                             SteamVR_Settings.instance.autoEnableVR = false;
-                            SteamVR_Settings.Save();
+                            //SteamVR_Settings.Save();
                             End();
                             return;
                     }

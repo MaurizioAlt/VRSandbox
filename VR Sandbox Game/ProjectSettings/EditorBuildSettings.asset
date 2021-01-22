@@ -5,15 +5,24 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/Start Menu.unity
-    guid: e05db0c086e5a6a4ca3d4c55215662b2
-  - enabled: 1
-    path: Assets/Scenes/ObjectSpawning.unity
-    guid: 2e12e1ddfa8a19d448681d656af01596
+    path: Assets/Scenes/VR Start Menu.unity
+    guid: 76388becb1944ad44ac06dc1aa6658c5
   - enabled: 1
     path: Assets/Scenes/Main Scene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 0
+    path: Assets/Scenes/ObjectSpawning.unity
+    guid: 2e12e1ddfa8a19d448681d656af01596
+  - enabled: 0
+    path: Assets/Scenes/Start Menu.unity
+    guid: 8611af309d949554db2a2fc6bca68ce6
+  - enabled: 0
+    path: Assets/Scenes/Locomotion.unity
+    guid: ca46181698bcb37428d9efa080cd89e8
   m_configObjects:
-    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: e8f7a7bde6e258c4da4f32cec48377ab,
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 6b86912c29dca6347ae2332333dba182,
       type: 2}
