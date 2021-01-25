@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ChangePosition : MonoBehaviour, IPointerUpHandler
+public class ChangePosition : MonoBehaviour
 {
     public GameObject menu;
-    public Slider slider;
+    public Slider sliderPositionX;
+    public Slider sliderRotateX;
 
     public void showPositionMenu()
     {
@@ -70,20 +71,42 @@ public class ChangePosition : MonoBehaviour, IPointerUpHandler
     }
 
 
-    float oldValue;
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        if (slider.value != oldValue)
-        {
-            Debug.Log("Slider value changed from " + oldValue + " to " + slider.value);
-            oldValue = slider.value;
-        }
-    }
-
     public void sliderincreasePositionX()
     {
-        oldValue = slider.value;
-        EditMenu.selectedGameObject.transform.position += new Vector3(slider.value, 0, 0);
-        slider.value = 0;
+        //EditMenu.selectedGameObject.transform.position = new Vector3(slider.value, transform.position.y, transform.position.z);
+
+        var pos = EditMenu.selectedGameObject.transform.position;
+        pos.x = sliderPositionX.value;
+        EditMenu.selectedGameObject.transform.position = pos;
+
+        //slider.value = 0;
     }
+
+
+    public void sliderincreaseRotateX()
+    {
+        //EditMenu.selectedGameObject.transform.position = new Vector3(slider.value, transform.position.y, transform.position.z);
+
+        //EditMenu.selectedGameObject.transform.Rotate(sliderRotateX.value, 0f, 0f, Space.Self);
+        //EditMenu.selectedGameObject.transform.eulerAngles = new Vector3(sliderRotateX.value, 0f, 0f);
+
+
+        var temp = EditMenu.selectedGameObject.transform.localEulerAngles;
+        temp.x = sliderRotateX.value;
+        EditMenu.selectedGameObject.transform.localEulerAngles = temp;
+
+
+        //EditMenu.selectedGameObject.transform.Rotation = Quaternion.Euler(sliderRotateX.value, 0f, 0f);
+
+
+        //slider.value = 0;
+    }
+
+
+    public void resetsliders()
+    {
+        sliderRotateX.value = 0f;
+    }
+
+
 }

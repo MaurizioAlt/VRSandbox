@@ -10,6 +10,8 @@ public class EditMenu : MonoBehaviour
     public GameObject positionmenu;
     public GameObject rotatemenu;
     public GameObject resizemenu;
+    public GameObject sliderpositionmenu;
+    public GameObject sliderrotatemenu;
 
     public static GameObject selectedGameObject;
 
@@ -89,4 +91,27 @@ public class EditMenu : MonoBehaviour
         rotatemenu.SetActive(false);
     }
 
+    public void SwitchEditToSliderPosition()
+    {
+        editmenu.SetActive(false);
+        sliderpositionmenu.SetActive(true);
+    }
+
+    public void SwitchSliderPositionToEdit()
+    {
+        editmenu.SetActive(true);
+        sliderpositionmenu.SetActive(false);
+    }
+
+    public void SwitchEditToSliderRotate()
+    {
+        editmenu.SetActive(false);
+        sliderrotatemenu.SetActive(true);
+    }
+
+    public void SwitchSliderRotateToEdit()
+    {
+        editmenu.SetActive(true);
+        sliderrotatemenu.SetActive(false);
+    }
 }
