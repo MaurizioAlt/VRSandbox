@@ -9,6 +9,8 @@ using Valve.VR.Extras;
 public class MenuVR : MonoBehaviour
 {
     public SteamVR_LaserPointer laserPointer;
+    public GameObject mainMenu;
+    public GameObject optionsMenu;
 
     void Awake()
     {
@@ -27,11 +29,19 @@ public class MenuVR : MonoBehaviour
         }
         if (e.target.name == "OptionsButton")
         {
-            Debug.Log("PlayButton was clicked");
+            mainMenu.SetActive(false);
+            optionsMenu.SetActive(true);
+            Debug.Log("Option Menu was clicked");
         }
         if (e.target.name == "QuitButton")
         {
+            Application.Quit();
             Debug.Log("ExitButton was clicked");
+        }
+        if (e.target.name == "BackToMainMenu")
+        {
+            mainMenu.SetActive(true);
+            optionsMenu.SetActive(false);
         }
     }
 
