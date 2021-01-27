@@ -114,4 +114,16 @@ public class EditMenu : MonoBehaviour
         editmenu.SetActive(true);
         sliderrotatemenu.SetActive(false);
     }
+
+    public void SwitchEditToSize()
+    {
+        editmenu.SetActive(false);
+        resizemenu.SetActive(true);
+    }
+
+    public void SwitchSizeToEdit()
+    {
+        editmenu.SetActive(true);
+        resizemenu.SetActive(false);
+    }
 }
