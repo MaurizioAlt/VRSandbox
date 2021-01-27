@@ -34,7 +34,8 @@ public class EditMenu : MonoBehaviour
                     Debug.Log("Hooray" + selectedGameObject.name);
                 }
 
-                if(!colormenu.activeInHierarchy && !positionmenu.activeInHierarchy && !rotatemenu.activeInHierarchy)
+                if(!colormenu.activeInHierarchy && !positionmenu.activeInHierarchy && !rotatemenu.activeInHierarchy && !resizemenu.activeInHierarchy 
+                    && !sliderpositionmenu.activeInHierarchy && !sliderrotatemenu.activeInHierarchy)
                     EnterEditMenu();
             }
         }
