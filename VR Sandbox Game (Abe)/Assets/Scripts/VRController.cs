@@ -11,11 +11,11 @@ public class VRController : MonoBehaviour
     public float speed = 0.0f;
     public float MaxSpeed = 2.0f;
     public float gravity = 30.0f;
-    public float rotationAmount = 90;
+    public float rotationIncrement = 90;
 
-    public SteamVR_Action_Boolean rotatePress;
-    public SteamVR_Action_Boolean m_MovePress;
-    public SteamVR_Action_Vector2 m_MoveValue;
+    public SteamVR_Action_Boolean rotatePress = null;
+    public SteamVR_Action_Boolean m_MovePress = null;
+    public SteamVR_Action_Vector2 m_MoveValue = null;
 
     private CharacterController m_CharacterController = null;
     private Transform m_CameraRig;
@@ -34,7 +34,6 @@ public class VRController : MonoBehaviour
 
     void Update()
     {
-        HandleHead();
         HandleHeight();
         CalculateMovement();
         SnapRotation();
@@ -55,35 +54,39 @@ public class VRController : MonoBehaviour
         newCenter.x = m_Head.localPosition.x;
         newCenter.z = m_Head.localPosition.z;
 
-        newCenter = Quaternion.Euler(0, -transform.eulerAngles.y, 0) * newCenter;
-
         // Apply
         m_CharacterController.center = newCenter;
     }
 
     private void CalculateMovement()
     {
-        Vector3 orientationEuler = new Vector3(0, m_Head.eulerAngles.y, 0);
-        Quaternion orientation = Quaternion.Euler(orientationEuler);
+        Quaternion orientation = CalculateOrientation();
         Vector3 movement = Vector3.zero;
 
-        if (m_MovePress.GetStateUp(inputSource))
+        if (m_MoveValue.axis.magnitude == 0)
             speed = 0;
 
-        if (m_MovePress.state)
-        {
+
             // Accelerates and clamps the speed when we reach the desired max speed
             speed += m_MoveValue.axis.magnitude * sensitivity;
             speed = Mathf.Clamp(speed, -MaxSpeed, MaxSpeed);
 
             // Orientation
-            movement += orientation * (speed * Vector3.forward)*Time.deltaTime;
-        }
-
+            movement += orientation * (speed * Vector3.forward);
+        
         // Add gravity
-        movement.y -= gravity * Time.deltaTime;
+            movement.y -= gravity * Time.deltaTime;
 
-        m_CharacterController.Move(movement);
+        m_CharacterController.Move(movement * Time.deltaTime);
+    }
+
+    private Quaternion CalculateOrientation()
+    {
+        float rotation = Mathf.Atan2(m_MoveValue.axis.x, m_MoveValue.axis.y);
+        rotation *= Mathf.Rad2Deg;
+
+        Vector3 orientationEuler = new Vector3(0, m_Head.eulerAngles.y+rotation, 0);
+        return Quaternion.Euler(orientationEuler);
     }
     private void SnapRotation()
     {
@@ -91,23 +94,13 @@ public class VRController : MonoBehaviour
 
         // when we press down on our left or right grip we will rotate
         if (rotatePress.GetStateDown(SteamVR_Input_Sources.LeftHand))
-            snapValue = -Mathf.Abs(rotationAmount);
+            snapValue = -Mathf.Abs(rotationIncrement);
 
         if (rotatePress.GetStateDown(SteamVR_Input_Sources.RightHand))
-            snapValue = Mathf.Abs(rotationAmount);
+            snapValue = Mathf.Abs(rotationIncrement);
 
         transform.RotateAround(m_Head.position, Vector3.up, snapValue);
     }
     
-    private void HandleHead()
-    {
-        Vector3 oldPosition = m_CameraRig.position;
-        Quaternion oldRotation = m_CameraRig.rotation;
-
-        transform.eulerAngles = new Vector3(0.0f, m_Head.rotation.eulerAngles.y, 0.0f);
-
-        m_CameraRig.position = oldPosition;
-        m_CameraRig.rotation = oldRotation;
-
-    }
+   
 }
