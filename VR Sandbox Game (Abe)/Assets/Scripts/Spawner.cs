@@ -4,7 +4,6 @@ using UnityEngine;
 using Valve.VR;
 
 
-
     public class Spawner : MonoBehaviour
 {
     public GameObject mainmenu;
@@ -12,6 +11,8 @@ using Valve.VR;
     public GameObject[] spawnObjects;
     private int index;
     public GameObject m_Pointer;
+    
+
 
     public SteamVR_Action_Boolean m_SpawnObject;
 
@@ -31,13 +32,16 @@ using Valve.VR;
         //pointer
         m_HasPosition = UpdatePointer();
         m_Pointer.SetActive(m_HasPosition);
+        
 
-        //Teleport
+        //spawn object
         if (m_SpawnObject.GetLastStateUp(m_Pose.inputSource))
             spawn();
 
+
+
     }
- 
+
     public void spawn()
     {
         Debug.Log("Tried spawning object");
