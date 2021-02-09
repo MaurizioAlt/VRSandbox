@@ -6,7 +6,7 @@ public class Spawner : MonoBehaviour
 {
     public GameObject mainmenu;
     public GameObject spawnmenu;
-    public GameObject[] spawnObjects;
+    public static GameObject[] spawnObjects;
     
     // forward spawning distance based on camera
     public int forwardDistance = 5;
@@ -31,5 +31,11 @@ public class Spawner : MonoBehaviour
     {
         mainmenu.SetActive(true);
         spawnmenu.SetActive(false);
+    }
+
+    public static GameObject GetSpawnObject(int index)
+    {
+        return index < spawnObjects.Length ?
+            spawnObjects[index] : null;
     }
 }
