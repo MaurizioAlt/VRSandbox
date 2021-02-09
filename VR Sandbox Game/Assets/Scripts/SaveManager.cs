@@ -48,4 +48,21 @@ public class SaveManager : MonoBehaviour
             buttonObject.GetComponentInChildren<TextMeshProUGUI>().text = saveFiles[index].Replace(Application.persistentDataPath + "/saves/", "");
         }
     }
+
+    // below code is not tested, attempt to grab all the objects user spawned in hierarchy
+    public List<GameObject> GetSpawnedObjects()
+    {
+        List<GameObject> objList = new List<GameObject>();
+
+        foreach(GameObject obj in Object.FindObjectsOfType(typeof(GameObject)))
+        {
+            Debug.Log("found object: " + obj.name + " from code SaveManager.cs > GetSpawnedObjects");
+            if(ObjectList.objects.Contains(obj.name))
+            {
+                objList.Add(obj);
+            }
+        }
+
+        return objList;
+    }
 }
