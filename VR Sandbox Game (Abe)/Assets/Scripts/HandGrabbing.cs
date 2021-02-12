@@ -5,25 +5,43 @@ using Valve.VR;
 
 public class HandGrabbing : MonoBehaviour
 {
-
+    private bool m_HasPosition = false;
     public SteamVR_Action_Boolean m_GrabAction = null;
 
     private SteamVR_Behaviour_Pose m_Pose = null;
     private FixedJoint m_Joint = null;
 
-    private InteractableObj m_CurrentInteractiable = null;
-    private List<InteractableObj> m_ContactInteractables = new List<InteractableObj>();
+    public GameObject movePointer;
+    private bool grabbingObj = false;
 
+    public static InteractableObj m_CurrentInteractiable = null;
+    public static List<InteractableObj> m_ContactInteractables = new List<InteractableObj>();
+
+    private Vector3 distanceFromInteractable;
     // Start is called before th7e first frame update
     private void Awake()
     {
         m_Pose = GetComponent<SteamVR_Behaviour_Pose>();
         m_Joint = GetComponent<FixedJoint>();
+        m_Joint.connectedBody = movePointer.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     private void Update()
     {
+        m_HasPosition = UpdatePointer();
+        if (m_HasPosition)
+            Debug.Log("Hit");
+        else
+            Debug.Log("Miss");
+
+        movePointer.SetActive(m_HasPosition);
+
+        if (grabbingObj)
+        {
+            m_CurrentInteractiable.transform.position = movePointer.transform.position;
+        }
+
         if (m_GrabAction.GetStateDown(m_Pose.inputSource))
         {
             Pickup();
@@ -38,6 +56,7 @@ public class HandGrabbing : MonoBehaviour
         }
     }
 
+    /*
     private void OnTriggerEnter(Collider other)
     {
         if (!other.gameObject.CompareTag("InteractableObject"))
@@ -53,6 +72,7 @@ public class HandGrabbing : MonoBehaviour
 
         m_ContactInteractables.Remove(other.gameObject.GetComponent<InteractableObj>());
     }
+    */
 
     public void Pickup()
     {
@@ -68,11 +88,20 @@ public class HandGrabbing : MonoBehaviour
             m_CurrentInteractiable.m_ActiveHand.Drop();
 
         //Position 
-        m_CurrentInteractiable.transform.position = transform.position;
+        //m_CurrentInteractiable.transform.position = movePointer.transform.position;
+
+        //distanceFromInteractable = new Vector3(m_CurrentInteractiable.transform.position.x - transform.position.x, m_CurrentInteractiable.transform.position.y - transform.position.y, m_CurrentInteractiable.transform.position.z - transform.position.z);
+
+        grabbingObj = true;
+        movePointer.transform.parent = transform;
 
         //Attach
-        Rigidbody targetBody = m_CurrentInteractiable.GetComponent<Rigidbody>();
-        m_Joint.connectedBody = targetBody;
+        //Rigidbody targetBody = m_CurrentInteractiable.GetComponent<Rigidbody>();
+
+        //m_CurrentInteractiable.transform.parent = movePointer.transform;
+
+        //m_Joint.connectedBody = targetBody;
+
 
         //Set active hand
         m_CurrentInteractiable.m_ActiveHand = this;
@@ -85,10 +114,14 @@ public class HandGrabbing : MonoBehaviour
             return;
 
         //Apply velocity
-        Rigidbody targetBody = m_CurrentInteractiable.GetComponent<Rigidbody>();
+        //Rigidbody targetBody = m_CurrentInteractiable.GetComponent<Rigidbody>();
 
         //Detach
-        m_Joint.connectedBody = null;
+        //m_Joint.connectedBody = null;
+        //m_CurrentInteractiable.transform.parent = null;
+
+        grabbingObj = false;
+        movePointer.transform.parent = null;
 
         //Clear
         m_CurrentInteractiable.m_ActiveHand = null;
@@ -104,7 +137,7 @@ public class HandGrabbing : MonoBehaviour
 
         foreach(InteractableObj interactable in m_ContactInteractables)
         {
-            distance = (interactable.transform.position - transform.position).sqrMagnitude;
+            distance = (interactable.transform.position - movePointer.transform.position).sqrMagnitude;
 
             if(distance < minDistance)
             {
@@ -115,5 +148,22 @@ public class HandGrabbing : MonoBehaviour
         }
 
         return nearest;
+    }
+    private bool UpdatePointer()
+    {
+        //Ray from controller
+        Ray ray = new Ray(transform.position, transform.forward);
+        RaycastHit hit;
+
+        //If its a hit
+        if (Physics.Raycast(ray, out hit) && !grabbingObj)
+        {
+            movePointer.transform.position = hit.point;
+            return true;
+        }
+
+
+        //If not a hit
+        return false;
     }
 }
