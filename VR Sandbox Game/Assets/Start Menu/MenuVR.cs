@@ -9,8 +9,8 @@ using Valve.VR.Extras;
 public class MenuVR : MonoBehaviour
 {
     public SteamVR_LaserPointer laserPointer;
-    public GameObject mainMenu;
-    public GameObject optionsMenu;
+    public GameObject MainMenu;
+    public GameObject SettingsMenu;
 
     void Awake()
     {
@@ -27,11 +27,11 @@ public class MenuVR : MonoBehaviour
             Debug.Log("PlayButton was clicked");
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
-        if (e.target.name == "OptionsButton")
+        if (e.target.name == "SettingsButton")
         {
-            mainMenu.SetActive(false);
-            optionsMenu.SetActive(true);
-            Debug.Log("Option Menu was clicked");
+            MainMenu.SetActive(false);
+            SettingsMenu.SetActive(true);
+            Debug.Log("Settings Menu was clicked");
         }
         if (e.target.name == "QuitButton")
         {
@@ -40,8 +40,8 @@ public class MenuVR : MonoBehaviour
         }
         if (e.target.name == "BackToMainMenu")
         {
-            mainMenu.SetActive(true);
-            optionsMenu.SetActive(false);
+            MainMenu.SetActive(true);
+            SettingsMenu.SetActive(false);
         }
     }
 
@@ -51,9 +51,9 @@ public class MenuVR : MonoBehaviour
         {
             Debug.Log("PlayButton was entered");
         }
-        else if (e.target.name == "OptionsButton")
+        else if (e.target.name == "SettingsButton")
         {
-            Debug.Log("Options Button was entered");
+            Debug.Log("Settings Button was entered");
         }
         else if (e.target.name == "QuitButton")
         {
@@ -67,9 +67,9 @@ public class MenuVR : MonoBehaviour
         {
             Debug.Log("PlayButton was exited");
         }
-        else if (e.target.name == "OptionsButton")
+        else if (e.target.name == "SettingsButton")
         {
-            Debug.Log("Options Button was exited");
+            Debug.Log("Settings Button was exited");
         }
         else if (e.target.name == "QuitButton")
         {
