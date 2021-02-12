@@ -9,13 +9,13 @@ public class NewBehaviourScript : MonoBehaviour
     {
         switch (this.gameObject.name) 
         {
-            case "Plain"
+            case "Plain":
                 SceneManager.LoadScene("");
                 break;
-            case "Space"
+            case "Space":
                 SceneManager.LoadScene("");
                 break;
-            case "Forest"
+            case "Forest":
                 SceneManager.LoadScene("");
                 break;
         }
