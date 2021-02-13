@@ -16,7 +16,7 @@ public class SceneSelectScript : MonoBehaviour
                 SceneManager.LoadScene("Space");
                 break;
             case "Forest":
-                SceneManager.LoadScene("Forest");
+                SceneManager.LoadScene("Simple Forest");
                 break;
         }
     }
