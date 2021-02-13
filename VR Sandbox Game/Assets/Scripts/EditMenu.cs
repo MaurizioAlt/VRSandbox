@@ -28,11 +28,11 @@ public class EditMenu : MonoBehaviour
             {
                 // Debug.Log( hit.transform.gameObject.name );
                 // if clicked on one of the prefab objects, set the current object to the most recent clicked one
-                if (ObjectList.objects.Contains(hit.transform.gameObject.name))
-                {
+                //if (ObjectList.objects.Contains(hit.transform.gameObject.name))
+                //{
                     selectedGameObject = hit.transform.gameObject;
                     Debug.Log("Hooray" + selectedGameObject.name);
-                }
+                //}
 
                 if(!colormenu.activeInHierarchy && !positionmenu.activeInHierarchy && !rotatemenu.activeInHierarchy && !resizemenu.activeInHierarchy 
                     && !sliderpositionmenu.activeInHierarchy && !sliderrotatemenu.activeInHierarchy)
