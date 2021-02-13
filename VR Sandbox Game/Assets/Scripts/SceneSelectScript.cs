@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class NewBehaviourScript : MonoBehaviour
+public class SceneSelectScript : MonoBehaviour
 {
     public void selectScene()
     {
         switch (this.gameObject.name) 
         {
             case "Plain":
-                SceneManager.LoadScene("");
+                SceneManager.LoadScene("Plain");
                 break;
             case "Space":
-                SceneManager.LoadScene("");
+                SceneManager.LoadScene("Space");
                 break;
             case "Forest":
-                SceneManager.LoadScene("");
+                SceneManager.LoadScene("Forest");
                 break;
         }
     }
