@@ -8,66 +8,66 @@ using UnityEngine;
 
 public class SerializationManager
 {
-    public static bool Save(string saveName, object saveData)
-    {
-        BinaryFormatter formatter = GetBinaryFormatter();
+    // public static bool Save(string saveName, object saveData)
+    // {
+    //     BinaryFormatter formatter = GetBinaryFormatter();
 
-        if(!Directory.Exists(Application.persistentDataPath + "/saves"))
-        {
-            Directory.CreateDirectory(Application.persistentDataPath + "/saves");
-        }
+    //     if(!Directory.Exists(Application.persistentDataPath + "/saves"))
+    //     {
+    //         Directory.CreateDirectory(Application.persistentDataPath + "/saves");
+    //     }
 
-        string path = Application.persistentDataPath + "/saves/" + saveName + ".save";
+    //     string path = Application.persistentDataPath + "/saves/" + saveName + ".save";
 
-        FileStream file = File.Create(path);
+    //     FileStream file = File.Create(path);
 
-        formatter.Serialize(file, saveData);
+    //     formatter.Serialize(file, saveData);
 
-        file.Close();
+    //     file.Close();
 
-        return true;
+    //     return true;
 
-    }
+    // }
 
-    public static object Load(string path)
-    {
-        if(!File.Exists(path))
-        {
-            return null; // maybe wanna log here
-        }
+    // public static object Load(string path)
+    // {
+    //     if(!File.Exists(path))
+    //     {
+    //         return null; // maybe wanna log here
+    //     }
 
-        BinaryFormatter formatter = GetBinaryFormatter();
+    //     BinaryFormatter formatter = GetBinaryFormatter();
 
-        FileStream file = File.Open(path, FileMode.Open);
+    //     FileStream file = File.Open(path, FileMode.Open);
 
-        try
-        {
-            object save = formatter.Deserialize(file);
-            file.Close();
-            return save;
-        }
-        catch 
-        {
-            Debug.LogErrorFormat("Failed to load file at {0}", path);
-            file.Close();
-            return null;
-        }
-    }
+    //     try
+    //     {
+    //         object save = formatter.Deserialize(file);
+    //         file.Close();
+    //         return save;
+    //     }
+    //     catch 
+    //     {
+    //         Debug.LogErrorFormat("Failed to load file at {0}", path);
+    //         file.Close();
+    //         return null;
+    //     }
+    // }
 
-    public static BinaryFormatter GetBinaryFormatter()
-    {
-        BinaryFormatter formatter = new BinaryFormatter();
+    // public static BinaryFormatter GetBinaryFormatter()
+    // {
+    //     BinaryFormatter formatter = new BinaryFormatter();
 
-        SurrogateSelector selector = new SurrogateSelector();
+    //     SurrogateSelector selector = new SurrogateSelector();
 
-        Vector3SerializationSurrogate vector3Surrogate = new Vector3SerializationSurrogate();
-        QuaterinionSerializationSurrogate quaternionSurrogate = new QuaterinionSerializationSurrogate();
+    //     Vector3SerializationSurrogate vector3Surrogate = new Vector3SerializationSurrogate();
+    //     QuaterinionSerializationSurrogate quaternionSurrogate = new QuaterinionSerializationSurrogate();
 
-        selector.AddSurrogate(typeof(Vector3), new StreamingContext(StreamingContextStates.All), vector3Surrogate);
-        selector.AddSurrogate(typeof(Quaternion), new StreamingContext(StreamingContextStates.All), quaternionSurrogate);
+    //     selector.AddSurrogate(typeof(Vector3), new StreamingContext(StreamingContextStates.All), vector3Surrogate);
+    //     selector.AddSurrogate(typeof(Quaternion), new StreamingContext(StreamingContextStates.All), quaternionSurrogate);
 
-        formatter.SurrogateSelector = selector;
+    //     formatter.SurrogateSelector = selector;
 
-        return formatter;
-    }
+    //     return formatter;
+    // }
 }

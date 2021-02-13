@@ -19,7 +19,7 @@ public class ObjectHandler : MonoBehaviour
             // here add
             // SaveData.current.objects.Add(objectData)
         }
-        GameEvents.current.onLoadEvent += DestroyObject;
+        // GameEvents.current.onLoadEvent += DestroyObject;
     }
 
     private void Update()
@@ -30,7 +30,7 @@ public class ObjectHandler : MonoBehaviour
 
     void DestroyObject()
     {
-        GameEvents.current.onLoadEvent -= DestroyObject;
+        // GameEvents.current.onLoadEvent -= DestroyObject;
         Destroy(gameObject);
     }
 }
