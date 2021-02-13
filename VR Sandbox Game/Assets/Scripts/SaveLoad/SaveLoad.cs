@@ -21,7 +21,7 @@ public class SaveLoad : MonoBehaviour
     public void Save(int i)
     {
         savedObjectPrefab[i] = EditMenu.selectedGameObject;
-        string path = "Assets/" + "prefab" + i + ".prefab";
+        string path = "Assets/Prefabs/" + "Custom" + i + ".prefab";
         PrefabUtility.SaveAsPrefabAsset(EditMenu.selectedGameObject, path);
     }
     public void Load(int i)
