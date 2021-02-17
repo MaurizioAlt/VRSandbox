@@ -31,12 +31,13 @@ public class EditMenu : MonoBehaviour
                 if (ObjectList.objects.Contains(hit.transform.gameObject.name))
                 {
                     selectedGameObject = hit.transform.gameObject;
-                    Debug.Log("Hooray" + selectedGameObject.name);
+                    Debug.Log("EditMenu >>> Update() >>> reset selectedGameObject: " + selectedGameObject.name);
                 }
 
                 if(!colormenu.activeInHierarchy && !positionmenu.activeInHierarchy && !rotatemenu.activeInHierarchy && !resizemenu.activeInHierarchy 
                     && !sliderpositionmenu.activeInHierarchy && !sliderrotatemenu.activeInHierarchy)
                     EnterEditMenu();
+                    Debug.Log("EditMenu >>> Update() >>> Entered edit menu: " + selectedGameObject.name);
             }
         }
     }

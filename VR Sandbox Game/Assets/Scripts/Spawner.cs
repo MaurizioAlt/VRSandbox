@@ -13,6 +13,16 @@ public class Spawner : MonoBehaviour
     // forward spawning distance based on camera
     public int forwardDistance = 5;
 
+    void Start()
+    {
+        // add name of objects that going to be spawned
+        ObjectList.objects.Add("Cube(Clone)");   
+        ObjectList.objects.Add("Capsule(Clone)");   
+        ObjectList.objects.Add("Cylinder(Clone)");   
+        ObjectList.objects.Add("Sphere(Clone)");   
+        ObjectList.objects.Add("TriangularPrism(Clone)");   
+    }
+
     public void spawn(int i)
     {
         Instantiate(spawnObjects[i], Camera.main.transform.position + Camera.main.transform.forward * forwardDistance, Camera.main.transform.rotation);
