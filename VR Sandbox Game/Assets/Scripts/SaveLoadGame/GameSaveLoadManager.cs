@@ -10,11 +10,17 @@ public class GameSaveLoadManager : MonoBehaviour
     private bool isDebug = true;
     public void Load()
     {   
-        // grab all the spawned objects from the hierarchy
         if(isDebug) Debug.Log("GameSaveLoadManager >>> Load()");
         if(isDebug) ObjectList.PrintList();
+
+        // grab all the spawned objects from the hierarchy
         List<GameObject> objList = GetSpanwedObjects();
-        List<SpanwedObjectData> objData = SpanwedObjectData.GetObjectData(objList);
+
+        // put in a wrapper class and tell SpawnedObjectSaveData
+        List<SpawnedObjectData> objData = SpawnedObjectData.GetSpawnedObjectData(objList);
+        SpawnedObjectSaveData.current.spawnedObjects = objData;
+
+        
     }
 
     public void Save() 
@@ -45,7 +51,7 @@ public class GameSaveLoadManager : MonoBehaviour
         int i = 0;
         foreach (GameObject obj in Object.FindObjectsOfType(typeof(GameObject)))
         {
-            if(ObjectList.objects.Contains(obj.name)) 
+            if(ObjectList.objects.ContainsKey(obj.name)) 
             {
                 if(isDebug) Debug.Log("GameSaveLoadManager >>> GetSpanwedObjects() number "  + i++ + " : " + obj.name);
             }

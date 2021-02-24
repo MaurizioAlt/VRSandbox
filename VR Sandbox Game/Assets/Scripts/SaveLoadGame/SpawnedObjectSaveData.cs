@@ -48,6 +48,6 @@ public class SpawnedObjectSaveData
 
     // }
 
-    public List<SpawnedObectData> spawnedObjects;
+    public List<SpawnedObjectData> spawnedObjects;
 
 }

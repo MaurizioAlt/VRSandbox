@@ -13,9 +13,9 @@ using UnityEngine;
 // }
 
 [System.Serializable]
-public class SpanwedObjectData
+public class SpawnedObjectData
 {
-    public string id;
+    public int id;
 
     // public ObjectType objectType;
 
@@ -23,12 +23,17 @@ public class SpanwedObjectData
 
     public Quaternion rotation; 
 
-    public static List<SpanwedObjectData> GetObjectData(List<GameObject> objList)
+    public static List<SpawnedObjectData> GetSpawnedObjectData(List<GameObject> objList)
     {
-        List<SpanwedObjectData> list = new List<SpanwedObjectData>();;
+        List<SpawnedObjectData> list = new List<SpawnedObjectData>();;
         foreach (GameObject obj in objList)
         {
-            
+            SpawnedObjectData curr = new SpawnedObjectData();
+            bool res = ObjectList.objects.TryGetValue(obj.name, out curr.id);
+            if(!res) { Debug.Log("SpawnedObjectData >>> GetObjectData >>> unknow object name: " + obj.name); }
+            curr.position = obj.transform.position;
+            curr.rotation = obj.transform.rotation;
+            list.Add(curr);
         }
 
         return list; 

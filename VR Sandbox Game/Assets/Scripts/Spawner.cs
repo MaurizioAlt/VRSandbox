@@ -17,7 +17,7 @@ public class Spawner : MonoBehaviour
     {
         for(int i = 0; i < spawnObjects.Length; i++)
         {
-            ObjectList.objects.Add(spawnObjects[i].name + "(Clone)");
+            ObjectList.objects.Add(spawnObjects[i].name + "(Clone)", i);
         }
     }
 
