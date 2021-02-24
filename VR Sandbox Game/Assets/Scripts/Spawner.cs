@@ -15,12 +15,10 @@ public class Spawner : MonoBehaviour
 
     void Start()
     {
-        // add name of objects that going to be spawned
-        ObjectList.objects.Add("Cube(Clone)");   
-        ObjectList.objects.Add("Capsule(Clone)");   
-        ObjectList.objects.Add("Cylinder(Clone)");   
-        ObjectList.objects.Add("Sphere(Clone)");   
-        ObjectList.objects.Add("TriangularPrism(Clone)");   
+        for(int i = 0; i < spawnObjects.Length; i++)
+        {
+            ObjectList.objects.Add(spawnObjects[i].name + "(Clone)");
+        }
     }
 
     public void spawn(int i)
