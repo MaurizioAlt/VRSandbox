@@ -68,7 +68,7 @@ public class GameSaveLoadManager : MonoBehaviour
             file.Close();
             SpawnedObjectSaveData.current = (SpawnedObjectSaveData)save;
             Debug.Log("GameSaveLoadManager >>> Load(), spanwedobject count: " + SpawnedObjectSaveData.current.spawnedObjects.Count);
-            LoadObjects();
+            InitializeObjects();
         }
         catch(Exception e)
         {
@@ -97,7 +97,7 @@ public class GameSaveLoadManager : MonoBehaviour
         return formatter;
     }
 
-    public void LoadObjects()
+    public void InitializeObjects()
     {
         for(int i = 0; i < SpawnedObjectSaveData.current.spawnedObjects.Count; i++)
         {

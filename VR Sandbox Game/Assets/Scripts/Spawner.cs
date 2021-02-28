@@ -26,11 +26,6 @@ public class Spawner : MonoBehaviour
         Instantiate(spawnObjects[i], Camera.main.transform.position + Camera.main.transform.forward * forwardDistance, Camera.main.transform.rotation);
     }
 
-    // public GameObject[] GetSpawnObjectList()
-    // {
-    //     return spawnObjects.Clone();
-    // }
-
     public void EnterMainMenu()
     {
         mainmenu.SetActive(true);
