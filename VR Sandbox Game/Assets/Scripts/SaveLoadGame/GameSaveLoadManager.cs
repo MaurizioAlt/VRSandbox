@@ -102,8 +102,7 @@ public class GameSaveLoadManager : MonoBehaviour
         for(int i = 0; i < SpawnedObjectSaveData.current.spawnedObjects.Count; i++)
         {
             SpawnedObjectData currentObj = SpawnedObjectSaveData.current.spawnedObjects[i];
-            Instantiate(spawner.spawnObjects[i], currentObj.position, currentObj.rotation);
-
+            Instantiate(spawner.spawnObjects[currentObj.id], currentObj.position, currentObj.rotation);
         }
     }
 
