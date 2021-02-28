@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
@@ -8,6 +9,8 @@ using UnityEngine;
 public class GameSaveLoadManager : MonoBehaviour
 {
     private bool isDebug = true;
+    private string path;
+
     public void Save()
     {   
         if(isDebug) Debug.Log("GameSaveLoadManager >>> Load()");
@@ -20,10 +23,10 @@ public class GameSaveLoadManager : MonoBehaviour
         List<SpawnedObjectData> objData = SpawnedObjectData.GetSpawnedObjectData(objList);
         SpawnedObjectSaveData.current.spawnedObjects = objData;
         SpawnedObjectSaveData.current.PrintSpawnedObjects();
-        SaveSpanwedObjectData("savegame_test");
+        path = SaveSpanwedObjectData("savegame_test");
     }
 
-    public void SaveSpanwedObjectData(string saveName)
+    public string SaveSpanwedObjectData(string saveName)
     {
 
         BinaryFormatter formatter = GetBinaryFormatter();
@@ -35,13 +38,40 @@ public class GameSaveLoadManager : MonoBehaviour
 
         FileStream file = File.Create(path);
 
-        formatter.Serialize(file, SpawnedObjectSaveData.current.spawnedObjects);
+        formatter.Serialize(file, (object)SpawnedObjectSaveData.current);
 
         Debug.Log("GameSaveLoadManager >>> SaveSpanwedObjectData >>> path: " + path);
+        
+        file.Close();
+
+        return path;
     }
 
     public void Load() 
     {
+        Debug.Log("GameSaveLoadManager >>> Load()");
+        if(!File.Exists(path))
+        {
+            SpawnedObjectSaveData.current = null;
+            return;
+        }
+        BinaryFormatter formatter = GetBinaryFormatter();
+        FileStream file = File.Open(path, FileMode.Open);
+
+        try
+        {
+            object save = formatter.Deserialize(file);
+            file.Close();
+            SpawnedObjectSaveData.current = (SpawnedObjectSaveData)save;
+            Debug.Log("GameSaveLoadManager >>> Load(), spanwedobject count: " + SpawnedObjectSaveData.current.spawnedObjects.Count);
+        }
+        catch(Exception e)
+        {
+            Debug.LogErrorFormat("GameSaveLoadManager >>> Failed to load file at {0}, {1}", path, e);
+            file.Close();
+            SpawnedObjectSaveData.current = null;
+            return;
+        }
 
     }
 
@@ -66,7 +96,7 @@ public class GameSaveLoadManager : MonoBehaviour
     {
         List<GameObject> gameObjects = new List<GameObject>();
         int i = 0;
-        foreach (GameObject obj in Object.FindObjectsOfType(typeof(GameObject)))
+        foreach (GameObject obj in UnityEngine.Object.FindObjectsOfType(typeof(GameObject)))
         {
             if(ObjectList.objects.ContainsKey(obj.name)) 
             {
