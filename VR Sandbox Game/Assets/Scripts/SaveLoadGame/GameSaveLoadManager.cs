@@ -8,7 +8,7 @@ using UnityEngine;
 public class GameSaveLoadManager : MonoBehaviour
 {
     private bool isDebug = true;
-    public void Load()
+    public void Save()
     {   
         if(isDebug) Debug.Log("GameSaveLoadManager >>> Load()");
         if(isDebug) ObjectList.PrintList();
@@ -19,11 +19,28 @@ public class GameSaveLoadManager : MonoBehaviour
         // put in a wrapper class and tell SpawnedObjectSaveData
         List<SpawnedObjectData> objData = SpawnedObjectData.GetSpawnedObjectData(objList);
         SpawnedObjectSaveData.current.spawnedObjects = objData;
-
-        
+        SpawnedObjectSaveData.current.PrintSpawnedObjects();
+        SaveSpanwedObjectData("savegame_test");
     }
 
-    public void Save() 
+    public void SaveSpanwedObjectData(string saveName)
+    {
+
+        BinaryFormatter formatter = GetBinaryFormatter();
+        if(!Directory.Exists(Application.persistentDataPath + "/saves"))
+        {
+            Directory.CreateDirectory(Application.persistentDataPath + "/saves");
+        }
+        string path = Application.persistentDataPath + "/saves" + saveName + ".save";
+
+        FileStream file = File.Create(path);
+
+        formatter.Serialize(file, SpawnedObjectSaveData.current.spawnedObjects);
+
+        Debug.Log("GameSaveLoadManager >>> SaveSpanwedObjectData >>> path: " + path);
+    }
+
+    public void Load() 
     {
 
     }
@@ -54,6 +71,7 @@ public class GameSaveLoadManager : MonoBehaviour
             if(ObjectList.objects.ContainsKey(obj.name)) 
             {
                 if(isDebug) Debug.Log("GameSaveLoadManager >>> GetSpanwedObjects() number "  + i++ + " : " + obj.name);
+                gameObjects.Add(obj);
             }
         }
         if(isDebug) Debug.Log("GameSaveLoadManager >>> GetSpanwedObjects() >>> # objects detected: " + i);

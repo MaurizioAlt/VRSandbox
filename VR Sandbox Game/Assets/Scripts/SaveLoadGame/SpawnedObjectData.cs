@@ -17,6 +17,8 @@ public class SpawnedObjectData
 {
     public int id;
 
+    public string name;
+
     // public ObjectType objectType;
 
     public Vector3 position;
@@ -33,7 +35,9 @@ public class SpawnedObjectData
             if(!res) { Debug.Log("SpawnedObjectData >>> GetObjectData >>> unknow object name: " + obj.name); }
             curr.position = obj.transform.position;
             curr.rotation = obj.transform.rotation;
+            curr.name = obj.name;
             list.Add(curr);
+            Debug.Log("SpawnedObjectData >>> GetObjectData >>> added object: " + curr.name + ", id: " + curr.id + ", pos: " + curr.position + ", rot: " + curr.rotation);
         }
 
         return list; 

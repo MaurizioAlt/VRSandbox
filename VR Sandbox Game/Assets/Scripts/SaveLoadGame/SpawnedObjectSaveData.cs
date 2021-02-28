@@ -50,4 +50,12 @@ public class SpawnedObjectSaveData
 
     public List<SpawnedObjectData> spawnedObjects;
 
+    public void PrintSpawnedObjects()
+    {
+        foreach(SpawnedObjectData data in spawnedObjects)
+        {
+            Debug.Log("SpanwedObjectSaveData >>> PrintSpanwedObjects" + data.name + ", id: " + data.id + ", pos: " + data.position + ", rot: " + data.rotation);
+        }
+    }
+
 }
