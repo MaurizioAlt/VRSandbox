@@ -11,6 +11,8 @@ public class GameSaveLoadManager : MonoBehaviour
     private bool isDebug = true;
     private string path;
 
+    public Spawner spawner;
+
     public void Save()
     {   
         if(isDebug) Debug.Log("GameSaveLoadManager >>> Load()");
@@ -66,6 +68,7 @@ public class GameSaveLoadManager : MonoBehaviour
             file.Close();
             SpawnedObjectSaveData.current = (SpawnedObjectSaveData)save;
             Debug.Log("GameSaveLoadManager >>> Load(), spanwedobject count: " + SpawnedObjectSaveData.current.spawnedObjects.Count);
+            LoadObjects();
         }
         catch(Exception e)
         {
@@ -92,6 +95,16 @@ public class GameSaveLoadManager : MonoBehaviour
         formatter.SurrogateSelector = selector;
 
         return formatter;
+    }
+
+    public void LoadObjects()
+    {
+        for(int i = 0; i < SpawnedObjectSaveData.current.spawnedObjects.Count; i++)
+        {
+            SpawnedObjectData currentObj = SpawnedObjectSaveData.current.spawnedObjects[i];
+            Instantiate(spawner.spawnObjects[i], currentObj.position, currentObj.rotation);
+
+        }
     }
 
     public void DestroyAllSpawnedObjectOnScene()
