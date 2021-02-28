@@ -49,6 +49,8 @@ public class GameSaveLoadManager : MonoBehaviour
 
     public void Load() 
     {
+        DestroyAllSpawnedObjectOnScene();
+
         Debug.Log("GameSaveLoadManager >>> Load()");
         if(!File.Exists(path))
         {
@@ -92,6 +94,15 @@ public class GameSaveLoadManager : MonoBehaviour
         return formatter;
     }
 
+    public void DestroyAllSpawnedObjectOnScene()
+    {
+        List<GameObject> objs = GetSpanwedObjects();
+        foreach(GameObject obj in objs)
+        {
+            Destroy(obj);
+        } 
+    }
+
     public List<GameObject> GetSpanwedObjects()
     {
         List<GameObject> gameObjects = new List<GameObject>();
@@ -107,4 +118,6 @@ public class GameSaveLoadManager : MonoBehaviour
         if(isDebug) Debug.Log("GameSaveLoadManager >>> GetSpanwedObjects() >>> # objects detected: " + i);
         return gameObjects;
     }
+
+
 }
