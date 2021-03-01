@@ -26,11 +26,6 @@ public class SpawnedObjectSaveData
         }
     }
 
-    public static void OnSave()
-    {
-        SerialManager.Save("objectsave", SpawnedObjectSaveData.current);
-    }
-
     public List<SpawnedObjectData> spawnedObjects;
 
     public void PrintSpawnedObjects()

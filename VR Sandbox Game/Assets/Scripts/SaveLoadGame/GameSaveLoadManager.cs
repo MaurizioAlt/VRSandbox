@@ -29,7 +29,10 @@ public class GameSaveLoadManager : MonoBehaviour
         // put in a wrapper class and tell SpawnedObjectSaveData
         List<SpawnedObjectData> objData = SpawnedObjectData.GetSpawnedObjectData(objList);
         SpawnedObjectSaveData.current.spawnedObjects = objData;
+
         SpawnedObjectSaveData.current.PrintSpawnedObjects();
+
+        // save the path, change if want multi file saving
         path = SaveSpanwedObjectData("savegame_test");
     }
 
