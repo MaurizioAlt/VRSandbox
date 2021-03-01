@@ -20,6 +20,7 @@ public class QuaternionSerializationSurrogate : ISerializationSurrogate
         quat.x = (float)info.GetValue("x", typeof(float));
         quat.y = (float)info.GetValue("y", typeof(float));
         quat.z = (float)info.GetValue("z", typeof(float));
+        quat.w = (float)info.GetValue("w", typeof(float));
         obj = quat;
         return obj;
     }

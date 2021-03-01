@@ -15,7 +15,7 @@ public class GameSaveLoadManager : MonoBehaviour
 
     public void Start()
     {
-        path = Application.persistentDataPath + "/saves" + "savegame_test" + ".save";
+        path = Application.persistentDataPath + "/saves/" + "savegame_test" + ".save";
     }
 
     public void Save()
@@ -41,7 +41,7 @@ public class GameSaveLoadManager : MonoBehaviour
         {
             Directory.CreateDirectory(Application.persistentDataPath + "/saves");
         }
-        string path = Application.persistentDataPath + "/saves" + saveName + ".save";
+        string path = Application.persistentDataPath + "/saves/" + saveName + ".save";
 
         FileStream file = File.Create(path);
 
