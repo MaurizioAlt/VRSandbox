@@ -13,6 +13,11 @@ public class GameSaveLoadManager : MonoBehaviour
 
     public Spawner spawner;
 
+    public void Start()
+    {
+        path = Application.persistentDataPath + "/saves" + "savegame_test" + ".save";
+    }
+
     public void Save()
     {   
         if(isDebug) Debug.Log("GameSaveLoadManager >>> Load()");
