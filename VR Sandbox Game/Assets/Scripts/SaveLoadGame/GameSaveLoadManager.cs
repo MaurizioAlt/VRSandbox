@@ -93,9 +93,11 @@ public class GameSaveLoadManager : MonoBehaviour
 
         Vector3SerializationSurrogate v3s = new Vector3SerializationSurrogate();
         QuaternionSerializationSurrogate qs = new QuaternionSerializationSurrogate();
+        ColorSerializationSurrogate color = new ColorSerializationSurrogate();
 
         selector.AddSurrogate(typeof(Vector3), new StreamingContext(StreamingContextStates.All), v3s);
         selector.AddSurrogate(typeof(Quaternion), new StreamingContext(StreamingContextStates.All), qs);
+        selector.AddSurrogate(typeof(Color), new StreamingContext(StreamingContextStates.All), color);
 
         formatter.SurrogateSelector = selector;
 
@@ -107,7 +109,8 @@ public class GameSaveLoadManager : MonoBehaviour
         for(int i = 0; i < SpawnedObjectSaveData.current.spawnedObjects.Count; i++)
         {
             SpawnedObjectData currentObj = SpawnedObjectSaveData.current.spawnedObjects[i];
-            Instantiate(spawner.spawnObjects[currentObj.id], currentObj.position, currentObj.rotation);
+            GameObject spawnedObj = Instantiate(spawner.spawnObjects[currentObj.id], currentObj.position, currentObj.rotation);
+            spawnedObj.GetComponent<Renderer>().material.color = currentObj.color;
         }
     }
 

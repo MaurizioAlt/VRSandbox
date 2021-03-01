@@ -25,6 +25,8 @@ public class SpawnedObjectData
 
     public Quaternion rotation; 
 
+    public Color color;
+
     public static List<SpawnedObjectData> GetSpawnedObjectData(List<GameObject> objList)
     {
         List<SpawnedObjectData> list = new List<SpawnedObjectData>();;
@@ -35,6 +37,7 @@ public class SpawnedObjectData
             if(!res) { Debug.Log("SpawnedObjectData >>> GetObjectData >>> unknow object name: " + obj.name); }
             curr.position = obj.transform.position;
             curr.rotation = obj.transform.rotation;
+            curr.color = obj.GetComponent<Renderer>().material.color;
             curr.name = obj.name;
             list.Add(curr);
             Debug.Log("SpawnedObjectData >>> GetObjectData >>> added object: " + curr.name + ", id: " + curr.id + ", pos: " + curr.position + ", rot: " + curr.rotation);
