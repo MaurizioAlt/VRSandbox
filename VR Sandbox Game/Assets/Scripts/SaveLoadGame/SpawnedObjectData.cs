@@ -23,6 +23,8 @@ public class SpawnedObjectData
 
     public Vector3 position;
 
+    public Vector3 scale;
+
     public Quaternion rotation; 
 
     public Color color;
@@ -39,6 +41,7 @@ public class SpawnedObjectData
             curr.rotation = obj.transform.rotation;
             curr.color = obj.GetComponent<Renderer>().material.color;
             curr.name = obj.name;
+            curr.scale = obj.transform.localScale;
             list.Add(curr);
             Debug.Log("SpawnedObjectData >>> GetObjectData >>> added object: " + curr.name + ", id: " + curr.id + ", pos: " + curr.position + ", rot: " + curr.rotation);
         }

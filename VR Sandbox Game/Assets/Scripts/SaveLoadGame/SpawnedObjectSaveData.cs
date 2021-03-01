@@ -31,23 +31,6 @@ public class SpawnedObjectSaveData
         SerialManager.Save("objectsave", SpawnedObjectSaveData.current);
     }
 
-    // public static void OnLoad()
-    // {
-
-    //     SpawnedObjectSaveData.current = (SpawnedObjectSaveData)SerialManager.Load(Application.persistentDataPath + "/saves/Save.save");
-        
-    //     for(int i = 0; i < SpawnedObjectSaveData.current.spawnedObjects.Count; i++)
-    //     {
-    //         SpawnedObectData currentObj = SpawnedObjectSaveData.current.spawnedObjects[i];
-    //         GameObject obj = EditMenu.selectedGameObject;
-    //         ObjectHandler objectHandler = obj.GetComponent<ObjectHandler>();
-    //         objectHandler.objectData = currentObj;
-    //         objectHandler.transform.position = currentObj.position;
-    //         objectHandler.transform.rotation = currentObj.rotation;
-    //     }
-
-    // }
-
     public List<SpawnedObjectData> spawnedObjects;
 
     public void PrintSpawnedObjects()

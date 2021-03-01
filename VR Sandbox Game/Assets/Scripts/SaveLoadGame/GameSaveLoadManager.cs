@@ -111,6 +111,7 @@ public class GameSaveLoadManager : MonoBehaviour
             SpawnedObjectData currentObj = SpawnedObjectSaveData.current.spawnedObjects[i];
             GameObject spawnedObj = Instantiate(spawner.spawnObjects[currentObj.id], currentObj.position, currentObj.rotation);
             spawnedObj.GetComponent<Renderer>().material.color = currentObj.color;
+            spawnedObj.transform.localScale = currentObj.scale;
         }
     }
 
