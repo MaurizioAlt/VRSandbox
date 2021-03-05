@@ -10,6 +10,8 @@ public class EditMenu : MonoBehaviour
     public GameObject positionmenu;
     public GameObject rotatemenu;
     public GameObject resizemenu;
+    public GameObject sliderpositionmenu;
+    public GameObject sliderrotatemenu;
 
     public static GameObject selectedGameObject;
 
@@ -26,13 +28,14 @@ public class EditMenu : MonoBehaviour
             {
                 // Debug.Log( hit.transform.gameObject.name );
                 // if clicked on one of the prefab objects, set the current object to the most recent clicked one
-                if (ObjectList.objects.Contains(hit.transform.gameObject.name))
-                {
+                //if (ObjectList.objects.Contains(hit.transform.gameObject.name))
+                //{
                     selectedGameObject = hit.transform.gameObject;
                     Debug.Log("Hooray" + selectedGameObject.name);
-                }
+                //}
 
-                if(!colormenu.activeInHierarchy && !positionmenu.activeInHierarchy && !rotatemenu.activeInHierarchy)
+                if(!colormenu.activeInHierarchy && !positionmenu.activeInHierarchy && !rotatemenu.activeInHierarchy && !resizemenu.activeInHierarchy 
+                    && !sliderpositionmenu.activeInHierarchy && !sliderrotatemenu.activeInHierarchy)
                     EnterEditMenu();
             }
         }
@@ -89,4 +92,39 @@ public class EditMenu : MonoBehaviour
         rotatemenu.SetActive(false);
     }
 
+    public void SwitchEditToSliderPosition()
+    {
+        editmenu.SetActive(false);
+        sliderpositionmenu.SetActive(true);
+    }
+
+    public void SwitchSliderPositionToEdit()
+    {
+        editmenu.SetActive(true);
+        sliderpositionmenu.SetActive(false);
+    }
+
+    public void SwitchEditToSliderRotate()
+    {
+        editmenu.SetActive(false);
+        sliderrotatemenu.SetActive(true);
+    }
+
+    public void SwitchSliderRotateToEdit()
+    {
+        editmenu.SetActive(true);
+        sliderrotatemenu.SetActive(false);
+    }
+
+    public void SwitchEditToSize()
+    {
+        editmenu.SetActive(false);
+        resizemenu.SetActive(true);
+    }
+
+    public void SwitchSizeToEdit()
+    {
+        editmenu.SetActive(true);
+        resizemenu.SetActive(false);
+    }
 }

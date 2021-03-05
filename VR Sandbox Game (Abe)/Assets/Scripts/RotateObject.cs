@@ -48,6 +48,11 @@ public class RotateObject : MonoBehaviour
             endRotation();
             Debug.Log("Down");
         }
+
+        if (rotatingObj)
+        {
+
+        }
     }
 
 

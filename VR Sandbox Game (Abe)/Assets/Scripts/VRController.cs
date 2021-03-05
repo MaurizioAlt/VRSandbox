@@ -13,14 +13,16 @@ public class VRController : MonoBehaviour
     public float gravity = 30.0f;
     public float rotationIncrement = 90;
 
-    public SteamVR_Action_Boolean rotatePress = null;
+    public SteamVR_Action_Boolean rotatePressLeft = null;
+    public SteamVR_Action_Boolean rotatePressRight = null;
+    public SteamVR_Action_Boolean fly = null;
     public SteamVR_Action_Boolean m_MovePress = null;
     public SteamVR_Action_Vector2 m_MoveValue = null;
 
     private CharacterController m_CharacterController = null;
     private Transform m_CameraRig;
     private Transform m_Head;
-
+    public float flySpeed = 1.0f;
 
     private void Awake()
     {
@@ -62,6 +64,7 @@ public class VRController : MonoBehaviour
     {
         Quaternion orientation = CalculateOrientation();
         Vector3 movement = Vector3.zero;
+        Vector3 flyingMovement = Vector3.zero;
 
         if (m_MoveValue.axis.magnitude == 0)
             speed = 0;
@@ -73,11 +76,20 @@ public class VRController : MonoBehaviour
 
             // Orientation
             movement += orientation * (speed * Vector3.forward);
-        
-        // Add gravity
-            movement.y -= gravity * Time.deltaTime;
 
+        if (fly.GetState(SteamVR_Input_Sources.RightHand)) {
+            flyingMovement += flySpeed * Vector3.up;
+           }
+        else if (fly.GetState(SteamVR_Input_Sources.LeftHand))
+        {
+            flyingMovement += flySpeed * Vector3.down;
+        }
+        // Add gravity
+        //movement.y -= gravity * Time.deltaTime;
+
+        m_CharacterController.Move(flyingMovement * Time.deltaTime);
         m_CharacterController.Move(movement * Time.deltaTime);
+
     }
 
     private Quaternion CalculateOrientation()
@@ -93,10 +105,10 @@ public class VRController : MonoBehaviour
         float snapValue = 0.0f;
 
         // when we press down on our left or right grip we will rotate
-        if (rotatePress.GetStateDown(SteamVR_Input_Sources.LeftHand))
+        if (rotatePressLeft.GetStateDown(SteamVR_Input_Sources.LeftHand))
             snapValue = -Mathf.Abs(rotationIncrement);
 
-        if (rotatePress.GetStateDown(SteamVR_Input_Sources.RightHand))
+        if (rotatePressRight.GetStateDown(SteamVR_Input_Sources.LeftHand))
             snapValue = Mathf.Abs(rotationIncrement);
 
         transform.RotateAround(m_Head.position, Vector3.up, snapValue);

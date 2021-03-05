@@ -43,7 +43,7 @@
     {
       "name": "/actions/default/in/SnapTurnLeft",
       "type": "boolean",
-      "requirement": "suggested"
+      "requirement": "mandatory"
     },
     {
       "name": "/actions/default/in/SnapTurnRight",
