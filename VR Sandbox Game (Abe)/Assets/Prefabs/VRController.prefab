@@ -170,9 +170,9 @@ MonoBehaviour:
     actionPath: /actions/default/in/InteractUI
     needsReinit: 0
   active: 1
-  color: {r: 0, g: 0, b: 0, a: 0}
+  color: {r: 1, g: 0, b: 0, a: 0}
   thickness: 0.002
-  clickColor: {r: 0, g: 1, b: 0, a: 1}
+  clickColor: {r: 1, g: 1, b: 1, a: 1}
   holder: {fileID: 0}
   pointer: {fileID: 0}
   addRigidBody: 0
@@ -364,9 +364,9 @@ MonoBehaviour:
     actionPath: /actions/default/in/InteractUI
     needsReinit: 0
   active: 1
-  color: {r: 0.078431375, g: 0.95686275, b: 1, a: 0}
+  color: {r: 0.07843137, g: 0.117510386, b: 1, a: 0}
   thickness: 0.002
-  clickColor: {r: 0, g: 1, b: 0, a: 1}
+  clickColor: {r: 1, g: 1, b: 1, a: 1}
   holder: {fileID: 0}
   pointer: {fileID: 0}
   addRigidBody: 0

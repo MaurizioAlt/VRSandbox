@@ -115,14 +115,17 @@ public class MenuVR : MonoBehaviour
         if (e.target.name == "DefaultScene")
         {
             Default.GetComponent<Image>().color = clickColor;
+            SceneManager.LoadScene(1);
         }
         if (e.target.name == "ForestScene")
         {
             Forest.GetComponent<Image>().color = clickColor;
+            SceneManager.LoadScene(2);
         }
         if (e.target.name == "SpaceScene")
         {
             Space.GetComponent<Image>().color = clickColor;
+            SceneManager.LoadScene(3);
         }
 
     }
