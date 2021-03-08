@@ -10,14 +10,17 @@ public class GameSaveLoadManager : MonoBehaviour
 {
     private bool isDebug = true;
     private string path;
+    private string saveName;
 
     public Spawner spawner;
 
     public void Start()
     {
-        path = Application.persistentDataPath + "/saves/" + "savegame_test" + ".save";
+        saveName = "savegame_test";
+        path = Application.persistentDataPath + "/saves/" + saveName + ".save";
     }
 
+    // call by the user, pass in saveName if want the user able to save different files
     public void Save()
     {   
         if(isDebug) Debug.Log("GameSaveLoadManager >>> Load()");
@@ -33,10 +36,10 @@ public class GameSaveLoadManager : MonoBehaviour
         SpawnedObjectSaveData.current.PrintSpawnedObjects();
 
         // save the path, change if want multi file saving
-        path = SaveSpanwedObjectData("savegame_test");
+        path = SaveSpanwedObjectData(saveName);
     }
 
-    public string SaveSpanwedObjectData(string saveName)
+    public string SaveSpanwedObjectData(string fileName)
     {
 
         BinaryFormatter formatter = GetBinaryFormatter();
@@ -44,7 +47,7 @@ public class GameSaveLoadManager : MonoBehaviour
         {
             Directory.CreateDirectory(Application.persistentDataPath + "/saves");
         }
-        string path = Application.persistentDataPath + "/saves/" + saveName + ".save";
+        string path = Application.persistentDataPath + "/saves/" + fileName + ".save";
 
         FileStream file = File.Create(path);
 
@@ -57,6 +60,8 @@ public class GameSaveLoadManager : MonoBehaviour
         return path;
     }
 
+    // call by user, pass in fileName if want user able to save different files
+    // and change saveName to fileName for the path variable
     public void Load() 
     {
         DestroyAllSpawnedObjectOnScene();
@@ -67,6 +72,9 @@ public class GameSaveLoadManager : MonoBehaviour
             SpawnedObjectSaveData.current = null;
             return;
         }
+
+        path = Application.persistentDataPath + "/saves/" + saveName + ".save";
+
         BinaryFormatter formatter = GetBinaryFormatter();
         FileStream file = File.Open(path, FileMode.Open);
 
@@ -133,7 +141,8 @@ public class GameSaveLoadManager : MonoBehaviour
         int i = 0;
         foreach (GameObject obj in UnityEngine.Object.FindObjectsOfType(typeof(GameObject)))
         {
-            if(ObjectList.objects.ContainsKey(obj.name)) 
+            // ObjectList.objects.ContainsKey(obj.name)
+            if(obj.name.Contains("(Clone)")) 
             {
                 if(isDebug) Debug.Log("GameSaveLoadManager >>> GetSpanwedObjects() number "  + i++ + " : " + obj.name);
                 gameObjects.Add(obj);

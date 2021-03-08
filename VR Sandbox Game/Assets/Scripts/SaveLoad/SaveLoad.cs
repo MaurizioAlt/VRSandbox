@@ -35,6 +35,7 @@ public class SaveLoad : MonoBehaviour
         // add the object to object list so the user can change the object property
         ObjectList.objects.Add(name, i);
         savedObjectPrefab[i] = EditMenu.selectedGameObject;
+        savedObjectPrefab[i].name = name;
         string path = "Assets/" + "prefab" + i + ".prefab";
         PrefabUtility.SaveAsPrefabAsset(EditMenu.selectedGameObject, path);
 

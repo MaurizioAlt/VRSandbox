@@ -26,7 +26,7 @@ public class SpawnedObjectData
             string name = obj.name;
             if(obj.name.IndexOf("(Clone)") != obj.name.LastIndexOf("(Clone)"))
             {
-                name = obj.name.Substring(0, obj.name.LastIndexOf("(Clone)"));
+                name = obj.name.Substring(0, obj.name.IndexOf("(Clone)") + 7);
             }
             bool res = ObjectList.objects.TryGetValue(name, out curr.id);
 
