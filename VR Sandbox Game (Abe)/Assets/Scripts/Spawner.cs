@@ -41,12 +41,32 @@ using Valve.VR;
         if (m_SpawnObject.GetLastStateUp(m_Pose.inputSource) && spawningObject) {
             spawn();
         }
-        
+        if (m_SpawnObject.GetStateDown(m_Pose.inputSource) && deletingObject)
+        {
+            delete();
+        }
 
 
     }
 
-   
+    public void delete()
+    {
+        Ray ray = new Ray(transform.position, transform.forward);
+        RaycastHit hit;
+        Vector2 delta;
+
+        Debug.Log("Deleting");
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (hit.collider.gameObject.CompareTag("InteractableObject") && (m_SpawnObject.GetStateDown(m_Pose.inputSource)))
+            {
+                Object.Destroy(hit.transform.gameObject);
+            }
+
+        }
+    }
+
     public void spawn()
     {
         Debug.Log("Tried spawning object");

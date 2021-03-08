@@ -58,8 +58,15 @@ public class IngameMenu : MonoBehaviour
             Debug.Log("pickup");
         }
 
-        if (SpawnMenu.activeSelf && menuActive)
+        if(SpawnMenu.activeSelf && menuActive && spawnerScript.deletingObject)
         {
+            spawnerScript.deletingObject = true;
+            spawnerScript.spawningObject = false;
+            teleporterScript.canTeleport = false;
+        }
+        else if (SpawnMenu.activeSelf && menuActive && !spawnerScript.deletingObject)
+        {
+            spawnerScript.deletingObject = false;
             spawnerScript.spawningObject = true;
             teleporterScript.canTeleport = false;
         }
@@ -67,6 +74,7 @@ public class IngameMenu : MonoBehaviour
         {
             spawnerScript.spawningObject = false;
             teleporterScript.canTeleport = true;
+            spawnerScript.deletingObject = false;
         }
 
     }
@@ -198,26 +206,35 @@ public class IngameMenu : MonoBehaviour
         {
             Debug.Log("Cube was clicked");
             spawnerScript.objectToSpawn = 0;
+            spawnerScript.deletingObject = false;
+            spawnerScript.spawningObject = true;
         }
         if (e.target.name == "Sphere")
         {
             Debug.Log("Sphere was clicked");
             spawnerScript.objectToSpawn = 1;
+            spawnerScript.deletingObject = false;
+            spawnerScript.spawningObject = true;
         }
         if (e.target.name == "Capsule")
         {
             Debug.Log("Capsule was clicked");
             spawnerScript.objectToSpawn = 2;
+            spawnerScript.deletingObject = false;
+            spawnerScript.spawningObject = true;
         }
         if (e.target.name == "Cylinder")
         {
             Debug.Log("Cylinder was clicked");
             spawnerScript.objectToSpawn = 3;
+            spawnerScript.deletingObject = false;
+            spawnerScript.spawningObject = true;
         }
         if (e.target.name == "DeleteButton")
         {
             Debug.Log("DeleteButton was clicked");
             spawnerScript.deletingObject = true;
+            spawnerScript.spawningObject = false;
         }
         if (e.target.name == "NextButton1")
         {
