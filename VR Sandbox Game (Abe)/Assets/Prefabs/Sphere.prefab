@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1524202998363998448}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: InteractableObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 34c9f039c90c9bc4c8b9965b026be845, type: 2}
+  - {fileID: 2100000, guid: 4d256f9ee5cbf5a47a54462765d360f3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

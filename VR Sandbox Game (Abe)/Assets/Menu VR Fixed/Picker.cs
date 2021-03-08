@@ -23,6 +23,8 @@ public class Picker : MonoBehaviour
     public Material matt;
     //public MeshRenderer m_Renderer;
 
+    Color selectedColor;
+
     //[SerializeField] private Renderer Object;
     RectTransform Rect;
     Texture2D ColorTexture;
@@ -80,21 +82,27 @@ public class Picker : MonoBehaviour
                 DebugText.color = color;
                 DebugText.text = debug;
 
+                selectedColor = color;
+
                 OnColorPreview?.Invoke(color);                    
+            }
+            if (hit.collider.gameObject.CompareTag("InteractableObject") && m_GrabAction.GetStateDown(m_Pose.inputSource))
+            {
+                hit.transform.gameObject.GetComponent<Renderer>().material.color = selectedColor;
             }
 
           //  if (hit.collider.gameObject.CompareTag("Object"))
-           // {
-                //Fetch the mesh renderer component from the GameObject
-                //m_Renderer = GetComponent<MeshRenderer>();
-                //Object.material.color = sampleMatt.color;
+          // {
+          //Fetch the mesh renderer component from the GameObject
+          //m_Renderer = GetComponent<MeshRenderer>();
+          //Object.material.color = sampleMatt.color;
 
-             //   if (m_GrabAction.GetState(m_Pose.inputSource))
-              //  {
-                    //Debug.Log(m_Renderer);
-                    //m_Renderer.GetComponent<MeshRenderer>().sharedMaterial.SetColor("_Color", sampleMatt.color);              
-             //   }
-          //  } 
+                //   if (m_GrabAction.GetState(m_Pose.inputSource))
+                //  {
+                //Debug.Log(m_Renderer);
+                //m_Renderer.GetComponent<MeshRenderer>().sharedMaterial.SetColor("_Color", sampleMatt.color);              
+                //   }
+                //  } 
 
         }           
     }
