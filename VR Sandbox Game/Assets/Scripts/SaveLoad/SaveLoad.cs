@@ -7,17 +7,6 @@ public class SaveLoad : MonoBehaviour
 {
     public GameObject[] savedObjectPrefab;
 
-    // public static HashSet<string> savedObjects = new HashSet<string>();
-    // void Start()
-    // {
-    //     // add name of objects that going to be spawned
-    //     savedObjects.Add("1");
-    //     savedObjects.Add("2");
-    //     savedObjects.Add("3");
-    //     savedObjects.Add("4");
-    //     savedObjects.Add("5");
-    // }
-
     public void Save(int i)
     {
         if(EditMenu.selectedGameObject == null)
@@ -44,7 +33,7 @@ public class SaveLoad : MonoBehaviour
     {
         if(savedObjectPrefab[i] == null) 
         {
-            // add message to let the user know nothing save there
+            // maybe add message to let the user know nothing save there
             Debug.Log("SaveLoad >>> Load() >>> no object at the slot");
             return;
         }
