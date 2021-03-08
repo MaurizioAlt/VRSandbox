@@ -23,7 +23,13 @@ public class SpawnedObjectData
         foreach (GameObject obj in objList)
         {
             SpawnedObjectData curr = new SpawnedObjectData();
-            bool res = ObjectList.objects.TryGetValue(obj.name, out curr.id);
+            string name = obj.name;
+            if(obj.name.IndexOf("(Clone)") != obj.name.LastIndexOf("(Clone)"))
+            {
+                name = obj.name.Substring(0, obj.name.LastIndexOf("(Clone)"));
+            }
+            bool res = ObjectList.objects.TryGetValue(name, out curr.id);
+
             if(!res) { Debug.Log("SpawnedObjectData >>> GetObjectData >>> unknow object name: " + obj.name); }
             curr.position = obj.transform.position;
             curr.rotation = obj.transform.rotation;

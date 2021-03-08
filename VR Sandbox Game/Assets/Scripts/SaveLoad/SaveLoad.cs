@@ -26,7 +26,7 @@ public class SaveLoad : MonoBehaviour
             Debug.Log("SaveLoad >>> Save() >>> no object selected");
             return;
         }
-        string name = EditMenu.selectedGameObject.name + "(Clone)";
+        string name = EditMenu.selectedGameObject.name + "(Clone)" + EditMenu.selectedGameObject.GetComponent<Renderer>().material.color;
         if(savedObjectPrefab[i] != null) 
         {
             Debug.Log("SaveLoad >>> Save() >>> overwrite saved object from: " + savedObjectPrefab[i].name + " to " + name);
