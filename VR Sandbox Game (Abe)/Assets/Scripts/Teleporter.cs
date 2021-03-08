@@ -14,6 +14,8 @@ public class Teleporter : MonoBehaviour
     private bool m_IsTeleporting = false;
     private float m_FadeTime = .5f;
 
+    public bool canTeleport = true;
+
     private void Awake()
     {
         m_Pose = GetComponent<SteamVR_Behaviour_Pose>();
@@ -26,7 +28,7 @@ public class Teleporter : MonoBehaviour
         m_Pointer.SetActive(m_HasPosition);
 
         //Teleport
-        if (m_Teleportation.GetLastStateUp(m_Pose.inputSource))
+        if (m_Teleportation.GetLastStateUp(m_Pose.inputSource) &&  canTeleport)
             TryToTeleport();
 
     }

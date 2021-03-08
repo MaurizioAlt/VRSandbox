@@ -23,17 +23,24 @@ public class IngameMenu : MonoBehaviour
     public GameObject Background;
     public GameObject ColorPicker;
     public GameObject MenuSquare;
+    public GameObject lengthButton;
+    public GameObject widthButton;
+    public GameObject heightButton;
 
     public SteamVR_Action_Boolean toggleMenu = null;
     private SteamVR_Behaviour_Pose m_Pose = null;
     private bool menuActive=false;
+
+    private Spawner spawnerScript;
+    private Teleporter teleporterScript;
 
     // Start is called before the first frame update
     void Awake()
     {
         m_Pose = GetComponent<SteamVR_Behaviour_Pose>();
         laserPointer.PointerClick += PointerClick;
-
+        spawnerScript = GetComponent<Spawner>();
+        teleporterScript = GetComponent<Teleporter>();
     }
 
     private void Update()
@@ -51,6 +58,16 @@ public class IngameMenu : MonoBehaviour
             Debug.Log("pickup");
         }
 
+        if (SpawnMenu.activeSelf && menuActive)
+        {
+            spawnerScript.spawningObject = true;
+            teleporterScript.canTeleport = false;
+        }
+        else
+        {
+            spawnerScript.spawningObject = false;
+            teleporterScript.canTeleport = true;
+        }
 
     }
 
@@ -165,7 +182,8 @@ public class IngameMenu : MonoBehaviour
         // Quit Menu
         if (e.target.name == "YesTitle")
         {
-            Application.Quit();
+            SceneManager.LoadScene(0);
+            //Application.Quit();
         }
         if (e.target.name == "NoTitle")
         {
@@ -179,22 +197,27 @@ public class IngameMenu : MonoBehaviour
         if (e.target.name == "Cube")
         {
             Debug.Log("Cube was clicked");
+            spawnerScript.objectToSpawn = 0;
         }
         if (e.target.name == "Sphere")
         {
             Debug.Log("Sphere was clicked");
+            spawnerScript.objectToSpawn = 1;
         }
         if (e.target.name == "Capsule")
         {
             Debug.Log("Capsule was clicked");
+            spawnerScript.objectToSpawn = 2;
         }
         if (e.target.name == "Cylinder")
         {
             Debug.Log("Cylinder was clicked");
+            spawnerScript.objectToSpawn = 3;
         }
         if (e.target.name == "DeleteButton")
         {
             Debug.Log("DeleteButton was clicked");
+            spawnerScript.deletingObject = true;
         }
         if (e.target.name == "NextButton1")
         {
@@ -213,10 +236,17 @@ public class IngameMenu : MonoBehaviour
         {
             Debug.Log("colorbutton was clicked");
             ColorPicker.SetActive(true);
+            lengthButton.SetActive(false);
+            widthButton.SetActive(false);
+            heightButton.SetActive(false);
         }
         if (e.target.name == "ScaleButton")
         {
             ColorPicker.SetActive(false);
+            lengthButton.SetActive(true);
+            widthButton.SetActive(true);
+            heightButton.SetActive(true);
+
         }
 
     }
