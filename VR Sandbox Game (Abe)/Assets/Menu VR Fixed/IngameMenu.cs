@@ -33,6 +33,8 @@ public class IngameMenu : MonoBehaviour
 
     private Spawner spawnerScript;
     private Teleporter teleporterScript;
+    private ObjectScaling scalerScript;
+    private Picker pickerScript;
 
     // Start is called before the first frame update
     void Awake()
@@ -41,6 +43,8 @@ public class IngameMenu : MonoBehaviour
         laserPointer.PointerClick += PointerClick;
         spawnerScript = GetComponent<Spawner>();
         teleporterScript = GetComponent<Teleporter>();
+        scalerScript = GetComponent<ObjectScaling>();
+        pickerScript = GetComponent<Picker>();
     }
 
     private void Update()
@@ -76,6 +80,25 @@ public class IngameMenu : MonoBehaviour
             teleporterScript.canTeleport = true;
             spawnerScript.deletingObject = false;
         }
+
+        if (ColorPicker.activeSelf && menuActive)
+        {
+            pickerScript.pickingColor = true;
+        }
+        else
+        {
+            pickerScript.pickingColor = false;
+        }
+
+        if(lengthButton.activeSelf && menuActive)
+        {
+            scalerScript.isScaling = true;
+        }
+        else
+        {
+            scalerScript.isScaling = false;
+        }
+
 
     }
 
@@ -264,6 +287,29 @@ public class IngameMenu : MonoBehaviour
             widthButton.SetActive(true);
             heightButton.SetActive(true);
 
+        }
+
+        //Scale Options
+        if(e.target.name == "WidthButton")
+        {
+            scalerScript.isScaling = true;
+            scalerScript.scalingWidth = true;
+            scalerScript.scalingLength = false;
+            scalerScript.scalingHeight = false;
+        }
+        if (e.target.name == "HeightButton")
+        {
+            scalerScript.isScaling = true;
+            scalerScript.scalingHeight = true;
+            scalerScript.scalingWidth = false;
+            scalerScript.scalingLength = false;
+        }
+        if (e.target.name == "LengthButton")
+        {
+            scalerScript.isScaling = true;
+            scalerScript.scalingLength = true;
+            scalerScript.scalingHeight = false;
+            scalerScript.scalingWidth = false;
         }
 
     }

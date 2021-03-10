@@ -60,6 +60,11 @@
       "requirement": "mandatory"
     },
     {
+      "name": "/actions/default/in/TouchpadPositionScaling",
+      "type": "vector2",
+      "requirement": "mandatory"
+    },
+    {
       "name": "/actions/default/out/Haptic",
       "type": "vibration"
     },

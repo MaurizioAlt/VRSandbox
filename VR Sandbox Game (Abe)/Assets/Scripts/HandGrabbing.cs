@@ -144,14 +144,13 @@ public class HandGrabbing : MonoBehaviour
             {
                 foundInteractable = true;
                 interactable = hit.collider.gameObject;
-                Debug.Log("Found interactable");
+
 
             }
             else
             {
                 foundInteractable = false;
                 interactable = null;
-                Debug.Log("Not interactable");
             }
             return true;
         }
