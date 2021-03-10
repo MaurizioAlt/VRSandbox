@@ -26,6 +26,7 @@ public class IngameMenu : MonoBehaviour
     public GameObject lengthButton;
     public GameObject widthButton;
     public GameObject heightButton;
+    public GameObject scaleButton;
 
     public SteamVR_Action_Boolean toggleMenu = null;
     private SteamVR_Behaviour_Pose m_Pose = null;
@@ -35,6 +36,7 @@ public class IngameMenu : MonoBehaviour
     private Teleporter teleporterScript;
     private ObjectScaling scalerScript;
     private Picker pickerScript;
+    private RotateObject rotateScript;
 
     // Start is called before the first frame update
     void Awake()
@@ -45,6 +47,7 @@ public class IngameMenu : MonoBehaviour
         teleporterScript = GetComponent<Teleporter>();
         scalerScript = GetComponent<ObjectScaling>();
         pickerScript = GetComponent<Picker>();
+        rotateScript = GetComponent<RotateObject>();
     }
 
     private void Update()
@@ -84,19 +87,23 @@ public class IngameMenu : MonoBehaviour
         if (ColorPicker.activeSelf && menuActive)
         {
             pickerScript.pickingColor = true;
+            rotateScript.canRotate = false;
         }
         else
         {
             pickerScript.pickingColor = false;
+            rotateScript.canRotate = true;
         }
 
-        if(lengthButton.activeSelf && menuActive)
+        if(lengthButton.activeSelf && scaleButton && menuActive)
         {
             scalerScript.isScaling = true;
+            rotateScript.canRotate = false;
         }
         else
         {
             scalerScript.isScaling = false;
+            rotateScript.canRotate = true;
         }
 
 
@@ -124,6 +131,7 @@ public class IngameMenu : MonoBehaviour
         {
             ClearWindows();
             EditMenu.SetActive(true);
+            scaleButton.SetActive(true);
         }
 
 
