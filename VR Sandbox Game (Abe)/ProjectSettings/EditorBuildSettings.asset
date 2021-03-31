@@ -12,8 +12,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Scene.unity
     guid: 87f88301dc12214498d3e321d241d29b
   - enabled: 1
-    path: Assets/Scenes/Forest.unity
-    guid: 79df16cf7c2587d42a9bc0be92068633
+    path: Assets/Scenes/Forest 2.unity
+    guid: dc15e20bbb3daea439aa577b92c7e866
   - enabled: 1
     path: Assets/Scenes/Space.unity
     guid: 54d65c80fc6223647a4038825a598ac8

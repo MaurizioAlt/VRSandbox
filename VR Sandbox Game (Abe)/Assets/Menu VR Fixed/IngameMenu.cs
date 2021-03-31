@@ -27,6 +27,8 @@ public class IngameMenu : MonoBehaviour
     public GameObject widthButton;
     public GameObject heightButton;
     public GameObject scaleButton;
+    public GameObject gameSaveLoadManager;
+    public AudioSource menuBleep;
 
     public SteamVR_Action_Boolean toggleMenu = null;
     private SteamVR_Behaviour_Pose m_Pose = null;
@@ -48,6 +50,7 @@ public class IngameMenu : MonoBehaviour
         scalerScript = GetComponent<ObjectScaling>();
         pickerScript = GetComponent<Picker>();
         rotateScript = GetComponent<RotateObject>();
+
     }
 
     private void Update()
@@ -57,12 +60,14 @@ public class IngameMenu : MonoBehaviour
             MenuSquare.SetActive(true);
             menuActive = true;
             Debug.Log("pickup");
+            menuBleep.Play();
         }
         else if (toggleMenu.GetStateDown(m_Pose.inputSource) && menuActive)
         {
             MenuSquare.SetActive(false);
             menuActive = false;
             Debug.Log("pickup");
+            menuBleep.Play();
         }
 
         if(SpawnMenu.activeSelf && menuActive && spawnerScript.deletingObject)
@@ -119,12 +124,14 @@ public class IngameMenu : MonoBehaviour
         {
             ClearWindows();
             MainMenu.SetActive(true);
+            menuBleep.Play();
         }
 
         if (e.target.name == "SpawnObjectButton")
         {
             ClearWindows();
             SpawnMenu.SetActive(true);
+            menuBleep.Play();
         }
 
         if (e.target.name == "EditMenuButton")
@@ -132,6 +139,7 @@ public class IngameMenu : MonoBehaviour
             ClearWindows();
             EditMenu.SetActive(true);
             scaleButton.SetActive(true);
+            menuBleep.Play();
         }
 
 
@@ -140,78 +148,97 @@ public class IngameMenu : MonoBehaviour
         {
             ClearWindows();
             SceneMenu.SetActive(true);
+            menuBleep.Play();
         }
         if (e.target.name == "SaveButton")
         {
             ClearWindows();
             SaveMenu.SetActive(true);
+            menuBleep.Play();
         }
         if (e.target.name == "LoadButton")
         {
             ClearWindows();
             LoadMenu.SetActive(true);
+            menuBleep.Play();
         }
         if (e.target.name == "SettingsButton")
         {
             ClearWindows();
             SettingsMenu.SetActive(true);
+            menuBleep.Play();
         }
         if (e.target.name == "QuitButton")
         {
             ClearWindows();
             QuitMenu.SetActive(true);
+            menuBleep.Play();
         }
 
         // Scene Menu
         if (e.target.name == "ForrestScene")
         {
             Debug.Log("ForrestScene was clicked");
+            menuBleep.Play();
+            SceneManager.LoadScene(2);
         }
         if (e.target.name == "DesertScene")
         {
             Debug.Log("DesertScene was clicked");
+            menuBleep.Play();
+            SceneManager.LoadScene(1);
         }
         if (e.target.name == "SpaceScene")
         {
             Debug.Log("SpaceScene was clicked");
+            menuBleep.Play();
+            SceneManager.LoadScene(3);
         }
 
 
         // Save Menu
         if (e.target.name == "Save1")
         {
-            Debug.Log("Save1 was clicked");
+            gameSaveLoadManager.GetComponent<GameSaveLoadManager>().Save("Slot1");
+            menuBleep.Play();
         }
         if (e.target.name == "Save2")
         {
-            Debug.Log("Save2 was clicked");
+            gameSaveLoadManager.GetComponent<GameSaveLoadManager>().Save("Slot2");
+            menuBleep.Play();
         }
         if (e.target.name == "Save3")
         {
-            Debug.Log("Save3 was clicked");
+            gameSaveLoadManager.GetComponent<GameSaveLoadManager>().Save("Slot3");
+            menuBleep.Play();
         }
         if (e.target.name == "Save4")
         {
-            Debug.Log("Save4 was clicked");
+            gameSaveLoadManager.GetComponent<GameSaveLoadManager>().Save("Slot4");
+            menuBleep.Play();
         }
 
 
         // Load Menu
         if (e.target.name == "Load1")
         {
-            Debug.Log("Load1 was clicked");
+            gameSaveLoadManager.GetComponent<GameSaveLoadManager>().Load("Slot1");
+            menuBleep.Play();
         }
         if (e.target.name == "Load2")
         {
-            Debug.Log("Load2 was clicked");
+            gameSaveLoadManager.GetComponent<GameSaveLoadManager>().Load("Slot2");
+            menuBleep.Play();
         }
         if (e.target.name == "Load3")
         {
-            Debug.Log("Load3 was clicked");
+            gameSaveLoadManager.GetComponent<GameSaveLoadManager>().Load("Slot3");
+            menuBleep.Play();
         }
         if (e.target.name == "Load4")
         {
-            Debug.Log("Load4 was clicked");
+            gameSaveLoadManager.GetComponent<GameSaveLoadManager>().Load("Slot4");
+            menuBleep.Play();
         }
 
 
@@ -223,11 +250,13 @@ public class IngameMenu : MonoBehaviour
         {
             SceneManager.LoadScene(0);
             //Application.Quit();
+            menuBleep.Play();
         }
         if (e.target.name == "NoTitle")
         {
             ClearWindows();
             MainMenu.SetActive(true);
+            menuBleep.Play();
         }
 
 
@@ -239,6 +268,7 @@ public class IngameMenu : MonoBehaviour
             spawnerScript.objectToSpawn = 0;
             spawnerScript.deletingObject = false;
             spawnerScript.spawningObject = true;
+            menuBleep.Play();
         }
         if (e.target.name == "Sphere")
         {
@@ -246,6 +276,7 @@ public class IngameMenu : MonoBehaviour
             spawnerScript.objectToSpawn = 1;
             spawnerScript.deletingObject = false;
             spawnerScript.spawningObject = true;
+            menuBleep.Play();
         }
         if (e.target.name == "Capsule")
         {
@@ -253,6 +284,7 @@ public class IngameMenu : MonoBehaviour
             spawnerScript.objectToSpawn = 2;
             spawnerScript.deletingObject = false;
             spawnerScript.spawningObject = true;
+            menuBleep.Play();
         }
         if (e.target.name == "Cylinder")
         {
@@ -260,22 +292,34 @@ public class IngameMenu : MonoBehaviour
             spawnerScript.objectToSpawn = 3;
             spawnerScript.deletingObject = false;
             spawnerScript.spawningObject = true;
+            menuBleep.Play();
+        }
+        if (e.target.name == "Plane")
+        {
+            Debug.Log("Cylinder was clicked");
+            spawnerScript.objectToSpawn = 4;
+            spawnerScript.deletingObject = false;
+            spawnerScript.spawningObject = true;
+            menuBleep.Play();
         }
         if (e.target.name == "DeleteButton")
         {
             Debug.Log("DeleteButton was clicked");
             spawnerScript.deletingObject = true;
             spawnerScript.spawningObject = false;
+            menuBleep.Play();
         }
         if (e.target.name == "NextButton1")
         {
             ClearWindows();
             SpawnMenu2.SetActive(true);
+            menuBleep.Play();
         }
         if (e.target.name == "PrevButton2")
         {
             ClearWindows();
             SpawnMenu.SetActive(true);
+            menuBleep.Play();
         }
 
         //Edit Menu
@@ -287,6 +331,7 @@ public class IngameMenu : MonoBehaviour
             lengthButton.SetActive(false);
             widthButton.SetActive(false);
             heightButton.SetActive(false);
+            menuBleep.Play();
         }
         if (e.target.name == "ScaleButton")
         {
@@ -294,6 +339,7 @@ public class IngameMenu : MonoBehaviour
             lengthButton.SetActive(true);
             widthButton.SetActive(true);
             heightButton.SetActive(true);
+            menuBleep.Play();
 
         }
 
@@ -304,6 +350,7 @@ public class IngameMenu : MonoBehaviour
             scalerScript.scalingWidth = true;
             scalerScript.scalingLength = false;
             scalerScript.scalingHeight = false;
+            menuBleep.Play();
         }
         if (e.target.name == "HeightButton")
         {
@@ -311,6 +358,7 @@ public class IngameMenu : MonoBehaviour
             scalerScript.scalingHeight = true;
             scalerScript.scalingWidth = false;
             scalerScript.scalingLength = false;
+            menuBleep.Play();
         }
         if (e.target.name == "LengthButton")
         {
@@ -318,6 +366,7 @@ public class IngameMenu : MonoBehaviour
             scalerScript.scalingLength = true;
             scalerScript.scalingHeight = false;
             scalerScript.scalingWidth = false;
+            menuBleep.Play();
         }
 
     }

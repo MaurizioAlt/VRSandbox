@@ -14,6 +14,8 @@ using Valve.VR;
     public bool spawningObject = false;
     public int objectToSpawn;
     public bool deletingObject = false;
+    public AudioSource spawnSound;
+    public AudioSource deleteSound;
     
 
 
@@ -62,6 +64,7 @@ using Valve.VR;
             if (hit.collider.gameObject.CompareTag("InteractableObject") && (m_SpawnObject.GetStateDown(m_Pose.inputSource)))
             {
                 Object.Destroy(hit.transform.gameObject);
+                deleteSound.Play();
             }
 
         }
@@ -72,6 +75,7 @@ using Valve.VR;
         Debug.Log("Tried spawning object");
         Vector3 pointerPosition = new Vector3(m_Pointer.transform.position.x, m_Pointer.transform.position.y+(spawnObjects[0].transform.localScale.y)/2, m_Pointer.transform.position.z);
 
+        spawnSound.Play();
         Instantiate(spawnObjects[objectToSpawn], pointerPosition, m_Pointer.transform.rotation);
     }
 

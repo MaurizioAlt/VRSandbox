@@ -8,6 +8,7 @@ public class Teleporter : MonoBehaviour
 
     public GameObject m_Pointer;
     public SteamVR_Action_Boolean m_Teleportation;
+    public AudioSource teleportSound;
 
     private SteamVR_Behaviour_Pose m_Pose = null;
     private bool m_HasPosition = false;
@@ -51,6 +52,7 @@ public class Teleporter : MonoBehaviour
 
         //Move
         StartCoroutine(MoveRig(cameraRig, translateVector));
+        teleportSound.Play();
     }
 
     private IEnumerator MoveRig(Transform cameraRig, Vector3 translation)

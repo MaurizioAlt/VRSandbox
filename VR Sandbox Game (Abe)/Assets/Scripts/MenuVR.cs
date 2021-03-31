@@ -32,6 +32,7 @@ public class MenuVR : MonoBehaviour
     public GameObject Default;
     public GameObject Forest;
     public GameObject Space;
+    public AudioSource menuBleep;
 
     public Color32 baseColor;
     public Color32 hoverColor;
@@ -53,23 +54,27 @@ public class MenuVR : MonoBehaviour
             ClearMenus();
             PlayMenu.SetActive(true);
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            menuBleep.Play();
         }
         if (e.target.name == "LoadButton")
         {
             LoadButton.GetComponent<Image>().color = clickColor;
             ClearMenus();
             LoadMenu.SetActive(true);
+            menuBleep.Play();
         }
         if (e.target.name == "SettingsButton")
         {
             SettingsButton.GetComponent<Image>().color = clickColor;
             ClearMenus();
-            SettingsMenu.SetActive(true);     
+            SettingsMenu.SetActive(true);
+            menuBleep.Play();
         }
         if (e.target.name == "QuitButton")
         {
             QuitButton.GetComponent<Image>().color = clickColor;
             Application.Quit();
+            menuBleep.Play();
         }
         
         // Back Button
@@ -78,18 +83,21 @@ public class MenuVR : MonoBehaviour
             SettingsBackButton.GetComponent<Image>().color = clickColor;
             ClearMenus();
             MainMenu.SetActive(true);
+            menuBleep.Play();
         }
         if (e.target.name == "LoadBackButton")
         {
             LoadBackButton.GetComponent<Image>().color = clickColor;
             ClearMenus();
             MainMenu.SetActive(true);
+            menuBleep.Play();
         }
         if (e.target.name == "PlayBackButton")
         {
             PlayBackButton.GetComponent<Image>().color = clickColor;
             ClearMenus();
             MainMenu.SetActive(true);
+            menuBleep.Play();
         }
 
 
@@ -97,18 +105,22 @@ public class MenuVR : MonoBehaviour
         if (e.target.name == "Slot1")
         {
             Slot1.GetComponent<Image>().color = clickColor;
+            menuBleep.Play();
         }
         if (e.target.name == "Slot2")
         {
             Slot2.GetComponent<Image>().color = clickColor;
+            menuBleep.Play();
         }
         if (e.target.name == "Slot3")
         {
             Slot3.GetComponent<Image>().color = clickColor;
+            menuBleep.Play();
         }
         if (e.target.name == "Slot4")
         {
             Slot4.GetComponent<Image>().color = clickColor;
+            menuBleep.Play();
         }
 
         // Play Menu
@@ -116,16 +128,19 @@ public class MenuVR : MonoBehaviour
         {
             Default.GetComponent<Image>().color = clickColor;
             SceneManager.LoadScene(1);
+            menuBleep.Play();
         }
         if (e.target.name == "ForestScene")
         {
             Forest.GetComponent<Image>().color = clickColor;
             SceneManager.LoadScene(2);
+            menuBleep.Play();
         }
         if (e.target.name == "SpaceScene")
         {
             Space.GetComponent<Image>().color = clickColor;
             SceneManager.LoadScene(3);
+            menuBleep.Play();
         }
 
     }

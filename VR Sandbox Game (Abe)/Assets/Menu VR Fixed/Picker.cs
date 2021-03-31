@@ -21,6 +21,7 @@ public class Picker : MonoBehaviour
     public GameObject ColorPick;
     public Material sampleMatt;
     public Material matt;
+    public AudioSource colorPickSound;
 
     public bool pickingColor;
     //public MeshRenderer m_Renderer;
@@ -91,6 +92,7 @@ public class Picker : MonoBehaviour
             if (hit.collider.gameObject.CompareTag("InteractableObject") && m_GrabAction.GetStateDown(m_Pose.inputSource) && pickingColor)
             {
                 hit.transform.gameObject.GetComponent<Renderer>().material.color = selectedColor;
+                colorPickSound.Play();
             }
 
           //  if (hit.collider.gameObject.CompareTag("Object"))

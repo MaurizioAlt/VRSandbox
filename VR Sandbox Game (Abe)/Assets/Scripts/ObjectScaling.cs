@@ -32,7 +32,7 @@ public class ObjectScaling : MonoBehaviour
         Vector2 delta;
 
         GameObject objectToScale;
-        float scaleSpeed = .3f;
+        float scaleSpeed = .15f;
 
         if (Physics.Raycast(ray, out hit))
         {
