@@ -17,6 +17,8 @@ public class SpawnedObjectData
 
     public Color color;
 
+    
+
     public static List<SpawnedObjectData> GetSpawnedObjectData(List<GameObject> objList)
     {
         List<SpawnedObjectData> list = new List<SpawnedObjectData>();;
@@ -24,13 +26,12 @@ public class SpawnedObjectData
         {
             SpawnedObjectData curr = new SpawnedObjectData();
             string name = obj.name;
-            if(obj.name.IndexOf("(Clone)") != obj.name.LastIndexOf("(Clone)"))
-            {
-                name = obj.name.Substring(0, obj.name.IndexOf("(Clone)") + 7);
-            }
-            //bool res = ObjectList.objects.TryGetValue(name, out curr.id);
+          
+            name = obj.name.Substring(0, obj.name.IndexOf("(Clone)"));
+            
+            bool res = ObjectList.objects.TryGetValue(name, out curr.id);
 
-            //if(!res) { Debug.Log("SpawnedObjectData >>> GetObjectData >>> unknow object name: " + obj.name); }
+            if(!res) { Debug.Log("SpawnedObjectData >>> GetObjectData >>> unknow object name: " + obj.name); }
             curr.position = obj.transform.position;
             curr.rotation = obj.transform.rotation;
             curr.color = obj.GetComponent<Renderer>().material.color;

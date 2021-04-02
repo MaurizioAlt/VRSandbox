@@ -27,7 +27,7 @@ public class SpawnedObjectSaveData
     }
 
     public List<SpawnedObjectData> spawnedObjects;
-
+    public int sceneIndex;
     public void PrintSpawnedObjects()
     {
         foreach(SpawnedObjectData data in spawnedObjects)

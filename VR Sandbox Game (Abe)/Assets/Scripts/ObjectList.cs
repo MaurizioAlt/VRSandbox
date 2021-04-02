@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class ObjectList : MonoBehaviour
 {
-    public static HashSet<string> objects = new HashSet<string>();
+    public static Dictionary<string, int> objects = new Dictionary<string, int>();
+    public static GameObject[] objListSpawnable;
 
-    void Start()
+    public static void createObjList(GameObject[] spawnObjects)
     {
+        objListSpawnable = new GameObject[spawnObjects.Length];
         // add name of objects that going to be spawned
-        objects.Add("Cube(Clone)");   
-        objects.Add("Capsule(Clone)");   
-        objects.Add("Cylinder(Clone)");   
-        objects.Add("Sphere(Clone)");   
-        objects.Add("TriangularPrism(Clone)");   
+        for (int i = 0; i < spawnObjects.Length; i++)
+        {
+            ObjectList.objects.Add(spawnObjects[i].name, i);
+            objListSpawnable[i] = spawnObjects[i];
+        }
+
     }
 }

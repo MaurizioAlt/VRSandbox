@@ -5,6 +5,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameSaveLoadManager : MonoBehaviour
 {
@@ -12,29 +13,33 @@ public class GameSaveLoadManager : MonoBehaviour
     private string path;
     private string saveName;
 
-    public Spawner spawner;
 
     public void Start()
     {
-        //saveName = "savegame_test";
-        //path = Application.persistentDataPath + "/saves/" + saveName + ".save";
+        saveName = "savegame_test";
+        path = Application.persistentDataPath + "/saves/" + saveName + ".save";
     }
 
     // call by the user, pass in saveName if want the user able to save different files
     public void Save(string saveName)
     {   
-
         if(isDebug) Debug.Log("GameSaveLoadManager >>> Load()");
-       // if(isDebug) ObjectList.PrintList();
-        //saveName = "savegame_test";
-        path = Application.persistentDataPath + "/saves/" + saveName + ".save";
-        SaveObjects();
+        //if(isDebug) ObjectList.PrintList();
+
+        // grab all the spawned objects from the hierarchy
+        List<GameObject> objList = GetSpanwedObjects();
+
+        //Saving index of current scene
+        SpawnedObjectSaveData.current.sceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        // put in a wrapper class and tell SpawnedObjectSaveData
+        List<SpawnedObjectData> objData = SpawnedObjectData.GetSpawnedObjectData(objList);
+        SpawnedObjectSaveData.current.spawnedObjects = objData;
+        SpawnedObjectSaveData.current.PrintSpawnedObjects();
 
         // save the path, change if want multi file saving
         path = SaveSpanwedObjectData(saveName);
     }
-
-
 
     public string SaveSpanwedObjectData(string fileName)
     {
@@ -59,7 +64,7 @@ public class GameSaveLoadManager : MonoBehaviour
 
     // call by user, pass in fileName if want user able to save different files
     // and change saveName to fileName for the path variable
-    public void Load(String fileName) 
+    public void Load(string saveName) 
     {
         DestroyAllSpawnedObjectOnScene();
 
@@ -70,7 +75,7 @@ public class GameSaveLoadManager : MonoBehaviour
             return;
         }
 
-        path = Application.persistentDataPath + "/saves/" + fileName + ".save";
+        path = Application.persistentDataPath + "/saves/" + saveName + ".save";
 
         BinaryFormatter formatter = GetBinaryFormatter();
         FileStream file = File.Open(path, FileMode.Open);
@@ -81,6 +86,7 @@ public class GameSaveLoadManager : MonoBehaviour
             file.Close();
             SpawnedObjectSaveData.current = (SpawnedObjectSaveData)save;
             Debug.Log("GameSaveLoadManager >>> Load(), spanwedobject count: " + SpawnedObjectSaveData.current.spawnedObjects.Count);
+            SceneManager.LoadScene(SpawnedObjectSaveData.current.sceneIndex);
             InitializeObjects();
         }
         catch(Exception e)
@@ -117,9 +123,7 @@ public class GameSaveLoadManager : MonoBehaviour
         for(int i = 0; i < SpawnedObjectSaveData.current.spawnedObjects.Count; i++)
         {
             SpawnedObjectData currentObj = SpawnedObjectSaveData.current.spawnedObjects[i];
-            
-            // This might be a problem depending on how we are instantiating the objects
-            GameObject spawnedObj = Instantiate(spawner.spawnObjects[currentObj.id], currentObj.position, currentObj.rotation);
+            GameObject spawnedObj = Instantiate(ObjectList.objListSpawnable[currentObj.id], currentObj.position, currentObj.rotation);
             spawnedObj.GetComponent<Renderer>().material.color = currentObj.color;
             spawnedObj.transform.localScale = currentObj.scale;
         }
@@ -136,14 +140,13 @@ public class GameSaveLoadManager : MonoBehaviour
 
     public List<GameObject> GetSpanwedObjects()
     {
-
-
         List<GameObject> gameObjects = new List<GameObject>();
         int i = 0;
         foreach (GameObject obj in UnityEngine.Object.FindObjectsOfType(typeof(GameObject)))
         {
-            // can be changed to tag checking instead of checking for (clone)
-            if (obj.name.Contains("(Clone)")) 
+            // ObjectList.objects.ContainsKey(obj.name)
+            // filter out the non interactable object for user
+            if(obj.CompareTag("InteractableObject") )
             {
                 if(isDebug) Debug.Log("GameSaveLoadManager >>> GetSpanwedObjects() number "  + i++ + " : " + obj.name);
                 gameObjects.Add(obj);
@@ -151,16 +154,6 @@ public class GameSaveLoadManager : MonoBehaviour
         }
         if(isDebug) Debug.Log("GameSaveLoadManager >>> GetSpanwedObjects() >>> # objects detected: " + i);
         return gameObjects;
-    }
-    public void SaveObjects()
-    {
-        // grab all the spawned objects from the hierarchy
-        List<GameObject> objList = GetSpanwedObjects();
-        Debug.Log(objList);
-        // put in a wrapper class and tell SpawnedObjectSaveData
-        List<SpawnedObjectData> objData = SpawnedObjectData.GetSpawnedObjectData(objList);
-        SpawnedObjectSaveData.current.spawnedObjects = objData;
-        SpawnedObjectSaveData.current.PrintSpawnedObjects();
     }
 
 

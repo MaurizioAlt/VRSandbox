@@ -16,7 +16,6 @@ using Valve.VR;
     public bool deletingObject = false;
     public AudioSource spawnSound;
     public AudioSource deleteSound;
-    
 
 
     public SteamVR_Action_Boolean m_SpawnObject;
@@ -30,8 +29,10 @@ using Valve.VR;
     private void Awake()
     {
         m_Pose = GetComponent<SteamVR_Behaviour_Pose>();
+        ObjectList.createObjList(spawnObjects);
     }
-    
+
+
     private void Update()
     {
         //pointer

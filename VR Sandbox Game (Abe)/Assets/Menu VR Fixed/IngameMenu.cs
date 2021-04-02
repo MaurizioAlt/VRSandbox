@@ -27,7 +27,6 @@ public class IngameMenu : MonoBehaviour
     public GameObject widthButton;
     public GameObject heightButton;
     public GameObject scaleButton;
-    public GameObject gameSaveLoadManager;
     public AudioSource menuBleep;
 
     public SteamVR_Action_Boolean toggleMenu = null;
@@ -39,6 +38,7 @@ public class IngameMenu : MonoBehaviour
     private ObjectScaling scalerScript;
     private Picker pickerScript;
     private RotateObject rotateScript;
+    private GameSaveLoadManager gslManager;
 
     // Start is called before the first frame update
     void Awake()
@@ -50,6 +50,7 @@ public class IngameMenu : MonoBehaviour
         scalerScript = GetComponent<ObjectScaling>();
         pickerScript = GetComponent<Picker>();
         rotateScript = GetComponent<RotateObject>();
+        gslManager = GetComponent<GameSaveLoadManager>();
 
     }
 
@@ -199,46 +200,46 @@ public class IngameMenu : MonoBehaviour
         // Save Menu
         if (e.target.name == "Save1")
         {
-            gameSaveLoadManager.GetComponent<GameSaveLoadManager>().Save("Slot1");
             menuBleep.Play();
+            gslManager.Save("Save1");
         }
         if (e.target.name == "Save2")
         {
-            gameSaveLoadManager.GetComponent<GameSaveLoadManager>().Save("Slot2");
             menuBleep.Play();
+            gslManager.Save("Save2");
         }
         if (e.target.name == "Save3")
         {
-            gameSaveLoadManager.GetComponent<GameSaveLoadManager>().Save("Slot3");
             menuBleep.Play();
+            gslManager.Save("Save3");
         }
         if (e.target.name == "Save4")
         {
-            gameSaveLoadManager.GetComponent<GameSaveLoadManager>().Save("Slot4");
             menuBleep.Play();
+            gslManager.Save("Save4");
         }
 
 
         // Load Menu
         if (e.target.name == "Load1")
         {
-            gameSaveLoadManager.GetComponent<GameSaveLoadManager>().Load("Slot1");
             menuBleep.Play();
+            gslManager.Load("Save1");
         }
         if (e.target.name == "Load2")
         {
-            gameSaveLoadManager.GetComponent<GameSaveLoadManager>().Load("Slot2");
             menuBleep.Play();
+            gslManager.Load("Save2");
         }
         if (e.target.name == "Load3")
         {
-            gameSaveLoadManager.GetComponent<GameSaveLoadManager>().Load("Slot3");
             menuBleep.Play();
+            gslManager.Load("Save3");
         }
         if (e.target.name == "Load4")
         {
-            gameSaveLoadManager.GetComponent<GameSaveLoadManager>().Load("Slot4");
             menuBleep.Play();
+            gslManager.Load("Save4");
         }
 
 
