@@ -11,6 +11,7 @@ public class ObjectScaling : MonoBehaviour
     public bool scalingLength = false;
     public bool scalingWidth = false;
     public bool scalingHeight = false;
+    public bool scalingAll = false;
 
     private void Awake()
     {
@@ -59,6 +60,15 @@ public class ObjectScaling : MonoBehaviour
                     lengthChange.z += (m_MoveValue.axis.y) * scaleSpeed; 
                     objectToScale = hit.transform.gameObject;
                     objectToScale.transform.localScale += lengthChange;
+                }
+                else if (scalingAll)
+                {
+                    Vector3 allChange = new Vector3(0, 0, 0);
+                    allChange.z += (m_MoveValue.axis.y) * scaleSpeed;
+                    allChange.y += (m_MoveValue.axis.y) * scaleSpeed;
+                    allChange.x += (m_MoveValue.axis.y) * scaleSpeed;
+                    objectToScale = hit.transform.gameObject;
+                    objectToScale.transform.localScale += allChange;
                 }
             }
         }

@@ -29,9 +29,15 @@ public class SpawnedObjectData
           
             name = obj.name.Substring(0, obj.name.IndexOf("(Clone)"));
             
-            bool res = ObjectList.objects.TryGetValue(name, out curr.id);
+            for(int i=0; i < Spawner.spawnableObjects.Length; i++)
+            {
+                if(Spawner.spawnableObjects[i].name == name)
+                {
+                    curr.id = i;
+                }
+            }
 
-            if(!res) { Debug.Log("SpawnedObjectData >>> GetObjectData >>> unknow object name: " + obj.name); }
+            
             curr.position = obj.transform.position;
             curr.rotation = obj.transform.rotation;
             curr.color = obj.GetComponent<Renderer>().material.color;

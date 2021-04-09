@@ -14,6 +14,10 @@ public class GameSaveLoadManager : MonoBehaviour
     private string saveName;
 
 
+    public void Awake()
+    {
+        
+    }
     public void Start()
     {
         saveName = "savegame_test";
@@ -23,7 +27,7 @@ public class GameSaveLoadManager : MonoBehaviour
     // call by the user, pass in saveName if want the user able to save different files
     public void Save(string saveName)
     {   
-        if(isDebug) Debug.Log("GameSaveLoadManager >>> Load()");
+        if(isDebug) Debug.Log("GameSaveLoadManager >>> Save()");
         //if(isDebug) ObjectList.PrintList();
 
         // grab all the spawned objects from the hierarchy
@@ -69,13 +73,16 @@ public class GameSaveLoadManager : MonoBehaviour
         DestroyAllSpawnedObjectOnScene();
 
         Debug.Log("GameSaveLoadManager >>> Load()");
-        if(!File.Exists(path))
+
+        path = Application.persistentDataPath + "/saves/" + saveName + ".save";
+
+        if (!File.Exists(path))
         {
             SpawnedObjectSaveData.current = null;
             return;
         }
-
-        path = Application.persistentDataPath + "/saves/" + saveName + ".save";
+       
+        
 
         BinaryFormatter formatter = GetBinaryFormatter();
         FileStream file = File.Open(path, FileMode.Open);
@@ -85,8 +92,11 @@ public class GameSaveLoadManager : MonoBehaviour
             object save = formatter.Deserialize(file);
             file.Close();
             SpawnedObjectSaveData.current = (SpawnedObjectSaveData)save;
-            Debug.Log("GameSaveLoadManager >>> Load(), spanwedobject count: " + SpawnedObjectSaveData.current.spawnedObjects.Count);
-            SceneManager.LoadScene(SpawnedObjectSaveData.current.sceneIndex);
+
+            if(SceneManager.GetActiveScene().buildIndex != SpawnedObjectSaveData.current.sceneIndex)
+                SceneManager.LoadScene(SpawnedObjectSaveData.current.sceneIndex);
+
+                Debug.Log("GameSaveLoadManager >>> Load(), spanwedobject count: " + SpawnedObjectSaveData.current.spawnedObjects.Count);
             InitializeObjects();
         }
         catch(Exception e)
@@ -120,12 +130,16 @@ public class GameSaveLoadManager : MonoBehaviour
 
     public void InitializeObjects()
     {
+        Debug.Log("Objects initialize");
         for(int i = 0; i < SpawnedObjectSaveData.current.spawnedObjects.Count; i++)
         {
             SpawnedObjectData currentObj = SpawnedObjectSaveData.current.spawnedObjects[i];
-            GameObject spawnedObj = Instantiate(ObjectList.objListSpawnable[currentObj.id], currentObj.position, currentObj.rotation);
+
+            GameObject spawnedObj = Instantiate(Spawner.spawnableObjects[currentObj.id], currentObj.position, currentObj.rotation);
             spawnedObj.GetComponent<Renderer>().material.color = currentObj.color;
             spawnedObj.transform.localScale = currentObj.scale;
+            
+         
         }
     }
 

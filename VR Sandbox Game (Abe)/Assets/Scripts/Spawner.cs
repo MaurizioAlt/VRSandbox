@@ -9,6 +9,7 @@ using Valve.VR;
     public GameObject mainmenu;
     public GameObject spawnmenu;
     public GameObject[] spawnObjects;
+    public static GameObject[] spawnableObjects;
     private int index;
     public GameObject m_Pointer;
     public bool spawningObject = false;
@@ -16,6 +17,8 @@ using Valve.VR;
     public bool deletingObject = false;
     public AudioSource spawnSound;
     public AudioSource deleteSound;
+
+    private bool objListInitialized = false;
 
 
     public SteamVR_Action_Boolean m_SpawnObject;
@@ -29,7 +32,7 @@ using Valve.VR;
     private void Awake()
     {
         m_Pose = GetComponent<SteamVR_Behaviour_Pose>();
-        ObjectList.createObjList(spawnObjects);
+        spawnableObjects = spawnObjects;
     }
 
 

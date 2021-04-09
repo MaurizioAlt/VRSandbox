@@ -42,7 +42,7 @@ public class HandGrabbing : MonoBehaviour
         if (m_GrabAction.GetState(m_Pose.inputSource) && foundInteractable)
         {
              Pickup();
-             Debug.Log("pickup");
+
         }
         else
         {
@@ -144,7 +144,6 @@ public class HandGrabbing : MonoBehaviour
             {
                 foundInteractable = true;
                 interactable = hit.collider.gameObject;
-
 
             }
             else
