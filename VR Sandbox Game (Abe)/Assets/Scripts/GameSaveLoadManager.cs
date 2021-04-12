@@ -93,8 +93,11 @@ public class GameSaveLoadManager : MonoBehaviour
             file.Close();
             SpawnedObjectSaveData.current = (SpawnedObjectSaveData)save;
 
-            if(SceneManager.GetActiveScene().buildIndex != SpawnedObjectSaveData.current.sceneIndex)
-                SceneManager.LoadScene(SpawnedObjectSaveData.current.sceneIndex);
+            if (SceneManager.GetActiveScene().buildIndex != SpawnedObjectSaveData.current.sceneIndex)
+            {
+                return;
+            }
+                //SceneManager.LoadScene(SpawnedObjectSaveData.current.sceneIndex);
 
                 Debug.Log("GameSaveLoadManager >>> Load(), spanwedobject count: " + SpawnedObjectSaveData.current.spawnedObjects.Count);
             InitializeObjects();

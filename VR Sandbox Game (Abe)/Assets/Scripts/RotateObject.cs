@@ -12,6 +12,10 @@ public class RotateObject : MonoBehaviour
 
     private bool rotatingObj = false;
     public bool canRotate = false;
+    public bool rotatingX = false;
+    public bool rotatingY = false;
+    public bool rotatingZ = false;
+
 
     // Start is called before th7e first frame update
     private void Awake()
@@ -42,9 +46,20 @@ public class RotateObject : MonoBehaviour
         {
             if (hit.collider.gameObject.CompareTag("InteractableObject"))
             {
-                rotationToMake.x += -(m_rotateValue.axis.y)*rotateSpeed;
-                rotationToMake.y += -(m_rotateValue.axis.x) * rotateSpeed;
-                hit.transform.gameObject.transform.rotation = Quaternion.Euler(rotationToMake.x+hit.transform.gameObject.transform.localEulerAngles.x, rotationToMake.y +hit.transform.gameObject.transform.localEulerAngles.y, 0);
+                if (rotatingX)
+                {
+                    rotationToMake.x += -(m_rotateValue.axis.y) * rotateSpeed;
+                }
+                if (rotatingY)
+                {
+                    rotationToMake.y += -(m_rotateValue.axis.y) * rotateSpeed;
+                }
+                if (rotatingZ)
+                {
+                    rotationToMake.z += -(m_rotateValue.axis.y) * rotateSpeed;
+                }
+
+                hit.transform.gameObject.transform.rotation = Quaternion.Euler(rotationToMake.x+hit.transform.gameObject.transform.localEulerAngles.x, rotationToMake.y +hit.transform.gameObject.transform.localEulerAngles.y, rotationToMake.z + hit.transform.gameObject.transform.localEulerAngles.z);
             }
         }
     }

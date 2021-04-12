@@ -34,6 +34,8 @@ public class MenuVR : MonoBehaviour
     public GameObject Space;
     public AudioSource menuBleep;
 
+    private GameSaveLoadManager gslManager;
+
     public Color32 baseColor;
     public Color32 hoverColor;
     public Color32 clickColor;
@@ -43,6 +45,7 @@ public class MenuVR : MonoBehaviour
         laserPointer.PointerIn += PointerInside;
         laserPointer.PointerOut += PointerOutside;
         laserPointer.PointerClick += PointerClick;
+        gslManager = GameObject.FindGameObjectWithTag("GameSaveLoadManager").GetComponent<GameSaveLoadManager>();
     }
 
     public void PointerClick(object sender, PointerEventArgs e)
@@ -106,21 +109,25 @@ public class MenuVR : MonoBehaviour
         {
             Slot1.GetComponent<Image>().color = clickColor;
             menuBleep.Play();
+            gslManager.Load("Save1");
         }
         if (e.target.name == "Slot2")
         {
             Slot2.GetComponent<Image>().color = clickColor;
             menuBleep.Play();
+            gslManager.Load("Save2");
         }
         if (e.target.name == "Slot3")
         {
             Slot3.GetComponent<Image>().color = clickColor;
             menuBleep.Play();
+            gslManager.Load("Save3");
         }
         if (e.target.name == "Slot4")
         {
             Slot4.GetComponent<Image>().color = clickColor;
             menuBleep.Play();
+            gslManager.Load("Save4");
         }
 
         // Play Menu

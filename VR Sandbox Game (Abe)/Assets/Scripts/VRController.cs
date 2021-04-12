@@ -97,7 +97,7 @@ public class VRController : MonoBehaviour
         float rotation = Mathf.Atan2(m_MoveValue.axis.x, m_MoveValue.axis.y);
         rotation *= Mathf.Rad2Deg;
 
-        Vector3 orientationEuler = new Vector3(0, m_Head.eulerAngles.y+rotation, 0);
+        Vector3 orientationEuler = new Vector3(0, m_Head.eulerAngles.y +rotation, 0);
         return Quaternion.Euler(orientationEuler);
     }
     private void SnapRotation()
