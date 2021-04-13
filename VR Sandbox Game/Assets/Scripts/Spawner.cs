@@ -9,7 +9,7 @@ public class Spawner : MonoBehaviour
     public GameObject loadmenu;
     public GameObject savemenu;
     public GameObject[] spawnObjects;
-    
+
     // forward spawning distance based on camera
     public int forwardDistance = 5;
 
