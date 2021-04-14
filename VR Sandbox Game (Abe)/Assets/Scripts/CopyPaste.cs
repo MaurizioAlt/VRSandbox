@@ -18,6 +18,7 @@ public class CopyPaste : MonoBehaviour
     private SteamVR_Behaviour_Pose m_Pose = null;
     public GameObject copiedDisplayPanel;
     public AudioSource copySound;
+    Collider displayObjectCollider;
 
     private void Awake()
     {
@@ -48,12 +49,7 @@ public class CopyPaste : MonoBehaviour
             {
                 if (m_copyAction.GetStateDown(m_Pose.inputSource)){
                     copyObject = hit.collider.gameObject;
-                    objToDisplay = hit.collider.gameObject;
-
-                    Vector3 objectScale = new Vector3(objToDisplay.transform.localScale.x % 40, objToDisplay.transform.localScale.y % 40, objToDisplay.transform.localScale.z % 40);
-                    objToDisplay.transform.localScale = objectScale;
-
-                    Instantiate(objToDisplay, objectDisplayPosition, objToDisplay.transform.rotation, copiedDisplayPanel.transform);
+                    
 
                     copySound.Play();
                 }

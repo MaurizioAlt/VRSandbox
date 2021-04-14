@@ -158,6 +158,14 @@ public class IngameMenu : MonoBehaviour
         {
             teleporterScript.canTeleport = false;
         }
+        
+        if(!menuActive)
+        {
+            teleporterScript.canTeleport = true;
+            copyPasteScript.isCopyingObject = false;
+            copyPasteScript.isPastingObject = false;
+
+        }
        
     }
 
