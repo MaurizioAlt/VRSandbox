@@ -84,6 +84,12 @@ using Valve.VR;
         Instantiate(spawnObjects[objectToSpawn], pointerPosition, m_Pointer.transform.rotation);
     }
 
+    public void spawnDupe(GameObject dupeToSpawn)
+    {
+        Vector3 pointerPosition = new Vector3(m_Pointer.transform.position.x, m_Pointer.transform.position.y + (spawnObjects[0].transform.localScale.y) / 2, m_Pointer.transform.position.z);
+        spawnSound.Play();
+        Instantiate(dupeToSpawn, pointerPosition, dupeToSpawn.transform.rotation);
+    }
     public void setIndex(int i)
     {
         index = i;

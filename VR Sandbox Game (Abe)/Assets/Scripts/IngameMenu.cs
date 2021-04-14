@@ -33,6 +33,13 @@ public class IngameMenu : MonoBehaviour
     public GameObject RotateXButton;
     public GameObject RotateYButton;
     public GameObject RotateZButton;
+    public GameObject copyPasteMenu;
+    public GameObject copyButton;
+    public GameObject pasteButton;
+
+    public Material selectColor;
+    private Material unselectColor;
+
 
     public GameObject musicPlus;
     public GameObject musicMinus;
@@ -50,6 +57,7 @@ public class IngameMenu : MonoBehaviour
     private Picker pickerScript;
     private RotateObject rotateScript;
     private GameSaveLoadManager gslManager;
+    private CopyPaste copyPasteScript;
 
     // Start is called before the first frame update
     void Awake()
@@ -62,7 +70,8 @@ public class IngameMenu : MonoBehaviour
         pickerScript = GetComponent<Picker>();
         rotateScript = GetComponent<RotateObject>();
         gslManager = GameObject.FindGameObjectWithTag("GameSaveLoadManager").GetComponent<GameSaveLoadManager>();
-
+        copyPasteScript = this.GetComponent<CopyPaste>();
+        unselectColor = RotateXButton.GetComponent<Renderer>().material;
     }
 
     private void Update()
@@ -101,6 +110,7 @@ public class IngameMenu : MonoBehaviour
             spawnerScript.deletingObject = false;
         }
 
+
         if (ColorPicker.activeSelf && menuActive)
         {
             pickerScript.pickingColor = true;
@@ -138,6 +148,17 @@ public class IngameMenu : MonoBehaviour
 
         }
 
+        if(copyPasteMenu.activeSelf == false)
+        {
+            copyPasteScript.isCopyingObject = false;
+            copyPasteScript.isPastingObject = false;
+        }
+
+        if (copyPasteMenu.activeSelf)
+        {
+            teleporterScript.canTeleport = false;
+        }
+       
     }
 
 
@@ -289,6 +310,14 @@ public class IngameMenu : MonoBehaviour
 
 
         // Spawn Menu
+        if (e.target.name == "Duplicate Objects")
+        {
+            ClearWindows();
+            copyPasteMenu.SetActive(true);
+            copyButton.GetComponent<Renderer>().material = unselectColor;
+            pasteButton.GetComponent<Renderer>().material = unselectColor;
+            menuBleep.Play();
+        }
         if (e.target.name == "Cube")
         {
    
@@ -366,6 +395,33 @@ public class IngameMenu : MonoBehaviour
             menuBleep.Play();
         }
 
+        //Copy/Paste Menu
+        if (e.target.name == "Spawn Premades")
+        {
+            ClearWindows();
+            copyPasteMenu.SetActive(false);
+            SpawnMenu.SetActive(true);
+            menuBleep.Play();
+        }
+        if (e.target.name == "CopyButton")
+        {
+            copyPasteScript.isCopyingObject = true;
+            copyPasteScript.isPastingObject = false;
+
+            copyButton.GetComponent<Renderer>().material = selectColor;
+            pasteButton.GetComponent<Renderer>().material = unselectColor;
+            menuBleep.Play();
+        }
+        if (e.target.name == "PasteButton")
+        {
+            copyPasteScript.isCopyingObject = false;
+            copyPasteScript.isPastingObject = true;
+            copyButton.GetComponent<Renderer>().material = unselectColor;
+            pasteButton.GetComponent<Renderer>().material = selectColor;
+            menuBleep.Play();
+        }
+
+
         //Edit Menu
 
         if (e.target.name == "ColorButton")
@@ -393,6 +449,10 @@ public class IngameMenu : MonoBehaviour
             RotateZButton.SetActive(false);
             menuBleep.Play();
 
+            lengthButton.GetComponent<Renderer>().material = unselectColor;
+            widthButton.GetComponent<Renderer>().material = unselectColor;
+            heightButton.GetComponent<Renderer>().material = unselectColor;
+
         }
         if (e.target.name == "RotateButton")
         {
@@ -406,6 +466,9 @@ public class IngameMenu : MonoBehaviour
             RotateZButton.SetActive(true);
             menuBleep.Play();
 
+            RotateXButton.GetComponent<Renderer>().material = unselectColor;
+            RotateYButton.GetComponent<Renderer>().material = unselectColor;
+            RotateZButton.GetComponent<Renderer>().material = unselectColor;
         }
 
         //Scale Options
@@ -416,6 +479,10 @@ public class IngameMenu : MonoBehaviour
             scalerScript.scalingLength = false;
             scalerScript.scalingHeight = false;
             menuBleep.Play();
+            lengthButton.GetComponent<Renderer>().material = unselectColor;
+            widthButton.GetComponent<Renderer>().material = selectColor;
+            heightButton.GetComponent<Renderer>().material = unselectColor;
+            allButton.GetComponent<Renderer>().material = unselectColor;
         }
         if (e.target.name == "HeightButton")
         {
@@ -424,6 +491,10 @@ public class IngameMenu : MonoBehaviour
             scalerScript.scalingWidth = false;
             scalerScript.scalingLength = false;
             menuBleep.Play();
+            lengthButton.GetComponent<Renderer>().material = unselectColor;
+            widthButton.GetComponent<Renderer>().material = unselectColor;
+            heightButton.GetComponent<Renderer>().material = selectColor;
+            allButton.GetComponent<Renderer>().material = unselectColor;
         }
         if (e.target.name == "LengthButton")
         {
@@ -432,6 +503,11 @@ public class IngameMenu : MonoBehaviour
             scalerScript.scalingHeight = false;
             scalerScript.scalingWidth = false;
             menuBleep.Play();
+
+            lengthButton.GetComponent<Renderer>().material = selectColor;
+            widthButton.GetComponent<Renderer>().material = unselectColor;
+            heightButton.GetComponent<Renderer>().material = unselectColor;
+            allButton.GetComponent<Renderer>().material = unselectColor;
         }
         if(e.target.name == "AllButton")
         {
@@ -440,6 +516,10 @@ public class IngameMenu : MonoBehaviour
             scalerScript.scalingHeight = false;
             scalerScript.scalingWidth = false;
             menuBleep.Play();
+            lengthButton.GetComponent<Renderer>().material = unselectColor;
+            widthButton.GetComponent<Renderer>().material = unselectColor;
+            heightButton.GetComponent<Renderer>().material = unselectColor;
+            allButton.GetComponent<Renderer>().material = selectColor;
         }
 
         if (e.target.name == "RotateX")
@@ -447,6 +527,10 @@ public class IngameMenu : MonoBehaviour
             rotateScript.rotatingX = true;
             rotateScript.rotatingY = false;
             rotateScript.rotatingZ = false;
+
+            RotateXButton.GetComponent<Renderer>().material = selectColor;
+            RotateYButton.GetComponent<Renderer>().material = unselectColor;
+            RotateZButton.GetComponent<Renderer>().material = unselectColor;
             menuBleep.Play();
         }
         if (e.target.name == "RotateY")
@@ -455,6 +539,10 @@ public class IngameMenu : MonoBehaviour
             rotateScript.rotatingY = true;
             rotateScript.rotatingZ = false;
             menuBleep.Play();
+
+            RotateXButton.GetComponent<Renderer>().material = unselectColor;
+            RotateYButton.GetComponent<Renderer>().material = selectColor;
+            RotateZButton.GetComponent<Renderer>().material = unselectColor;
         }
         if (e.target.name == "RotateZ")
         {
@@ -462,6 +550,10 @@ public class IngameMenu : MonoBehaviour
             rotateScript.rotatingY = false;
             rotateScript.rotatingZ = true;
             menuBleep.Play();
+
+            RotateXButton.GetComponent<Renderer>().material = unselectColor;
+            RotateYButton.GetComponent<Renderer>().material = unselectColor;
+            RotateZButton.GetComponent<Renderer>().material = selectColor;
         }
 
         if (e.target.name == "MusicPlus")
@@ -514,6 +606,7 @@ public class IngameMenu : MonoBehaviour
         SpawnMenu2.SetActive(false);
         EditMenu.SetActive(false);
         //ColorPicker.SetActive(false);
+        copyPasteMenu.SetActive(false);
 
     }
     /*public void ChangeScene()
