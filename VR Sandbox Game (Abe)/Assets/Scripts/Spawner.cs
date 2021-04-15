@@ -77,7 +77,17 @@ using Valve.VR;
     public void spawn()
     {
         Debug.Log("Tried spawning object");
-        Vector3 pointerPosition = new Vector3(m_Pointer.transform.position.x, m_Pointer.transform.position.y+(spawnObjects[0].transform.localScale.y)/2, m_Pointer.transform.position.z);
+
+        float heightMult = 1;
+        if(objectToSpawn == 10)
+        {
+            heightMult = 3f;
+        }
+        else
+        {
+            heightMult = 1;
+        }
+        Vector3 pointerPosition = new Vector3(m_Pointer.transform.position.x, m_Pointer.transform.position.y+(spawnObjects[objectToSpawn].transform.localScale.y * heightMult), m_Pointer.transform.position.z);
 
         spawnSound.Play();
 
@@ -86,7 +96,7 @@ using Valve.VR;
 
     public void spawnDupe(GameObject dupeToSpawn)
     {
-        Vector3 pointerPosition = new Vector3(m_Pointer.transform.position.x, m_Pointer.transform.position.y + (spawnObjects[0].transform.localScale.y) / 2, m_Pointer.transform.position.z);
+        Vector3 pointerPosition = new Vector3(m_Pointer.transform.position.x, m_Pointer.transform.position.y + (dupeToSpawn.transform.localScale.y), m_Pointer.transform.position.z);
         spawnSound.Play();
         Instantiate(dupeToSpawn, pointerPosition, dupeToSpawn.transform.rotation);
     }

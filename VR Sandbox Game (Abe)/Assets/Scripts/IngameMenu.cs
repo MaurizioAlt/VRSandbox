@@ -383,6 +383,53 @@ public class IngameMenu : MonoBehaviour
             Debug.Log("Triangular prism");
 
         }
+        if (e.target.name == "Half Sphere")
+        {
+
+            spawnerScript.objectToSpawn = 7;
+            spawnerScript.deletingObject = false;
+            spawnerScript.spawningObject = true;
+            menuBleep.Play();
+
+        }
+        if (e.target.name == "Ring")
+        {
+
+            spawnerScript.objectToSpawn = 8;
+            spawnerScript.deletingObject = false;
+            spawnerScript.spawningObject = true;
+            menuBleep.Play();
+
+        }
+        if (e.target.name == "Pyramid")
+        {
+
+            spawnerScript.objectToSpawn = 9;
+            spawnerScript.deletingObject = false;
+            spawnerScript.spawningObject = true;
+            menuBleep.Play();
+
+        }
+        if (e.target.name == "Diamond")
+        {
+
+            spawnerScript.objectToSpawn = 10;
+            spawnerScript.deletingObject = false;
+            spawnerScript.spawningObject = true;
+            menuBleep.Play();
+            Debug.Log("Triangular prism");
+
+        }
+        if (e.target.name == "Wedge")
+        {
+
+            spawnerScript.objectToSpawn = 11;
+            spawnerScript.deletingObject = false;
+            spawnerScript.spawningObject = true;
+            menuBleep.Play();
+            Debug.Log("Triangular prism");
+
+        }
         if (e.target.name == "DeleteButton")
         {
             
@@ -613,7 +660,7 @@ public class IngameMenu : MonoBehaviour
         SpawnMenu.SetActive(false);
         SpawnMenu2.SetActive(false);
         EditMenu.SetActive(false);
-        //ColorPicker.SetActive(false);
+        ColorPicker.SetActive(false);
         copyPasteMenu.SetActive(false);
 
     }

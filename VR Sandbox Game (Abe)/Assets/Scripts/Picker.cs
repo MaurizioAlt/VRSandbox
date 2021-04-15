@@ -89,7 +89,14 @@ public class Picker : MonoBehaviour
             }
             if (hit.collider.gameObject.CompareTag("InteractableObject") && m_GrabAction.GetStateDown(m_Pose.inputSource) && pickingColor)
             {
-                hit.transform.gameObject.GetComponent<Renderer>().material.color = selectedColor;
+               // hit.transform.gameObject.GetComponent<Renderer>().material.color = selectedColor;
+
+                for(int i=0; i< hit.transform.gameObject.GetComponent<Renderer>().materials.Length; i++)
+                {
+                    hit.transform.gameObject.GetComponent<Renderer>().materials[i].color = selectedColor;
+
+                }
+
                 colorPickSound.Play();
             }
 
