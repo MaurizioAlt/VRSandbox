@@ -86,6 +86,7 @@ public class GameSaveLoadManager : MonoBehaviour
 
         BinaryFormatter formatter = GetBinaryFormatter();
         FileStream file = File.Open(path, FileMode.Open);
+        Debug.Log(path);
 
         try
         {

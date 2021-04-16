@@ -36,6 +36,9 @@ public class IngameMenu : MonoBehaviour
     public GameObject copyPasteMenu;
     public GameObject copyButton;
     public GameObject pasteButton;
+    public GameObject saveConfirmMenu;
+    private string saveOption;
+    private bool confirmingSave = false;
 
     public Material selectColor;
     private Material unselectColor;
@@ -196,6 +199,13 @@ public class IngameMenu : MonoBehaviour
             scaleButton.SetActive(true);
             RotateButton.SetActive(true);
             menuBleep.Play();
+            lengthButton.GetComponent<Renderer>().material = unselectColor;
+            widthButton.GetComponent<Renderer>().material = unselectColor;
+            heightButton.GetComponent<Renderer>().material = unselectColor;
+            allButton.GetComponent<Renderer>().material = unselectColor;
+            RotateXButton.GetComponent<Renderer>().material = unselectColor;
+            RotateYButton.GetComponent<Renderer>().material = unselectColor;
+            RotateZButton.GetComponent<Renderer>().material = unselectColor;
         }
 
 
@@ -255,23 +265,59 @@ public class IngameMenu : MonoBehaviour
         // Save Menu
         if (e.target.name == "Save1")
         {
-            menuBleep.Play();
-            gslManager.Save("Save1");
+            if (!confirmingSave)
+            {
+                menuBleep.Play();
+                saveOption = "Save1";
+                saveConfirmMenu.SetActive(true);
+                confirmingSave = true;
+            }
         }
         if (e.target.name == "Save2")
         {
-            menuBleep.Play();
-            gslManager.Save("Save2");
+            if (!confirmingSave)
+            {
+                menuBleep.Play();
+                saveOption = "Save2";
+                saveConfirmMenu.SetActive(true);
+                confirmingSave = true;
+            }
         }
         if (e.target.name == "Save3")
         {
-            menuBleep.Play();
-            gslManager.Save("Save3");
+            if (!confirmingSave)
+            {
+                menuBleep.Play();
+                saveOption = "Save3";
+                saveConfirmMenu.SetActive(true);
+                confirmingSave = true;
+            }
         }
         if (e.target.name == "Save4")
         {
+            if (!confirmingSave)
+            {
+                menuBleep.Play();
+                saveOption = "Save4";
+                saveConfirmMenu.SetActive(true);
+                confirmingSave = true;
+            }
+        }
+
+        if(e.target.name == "YesSave")
+        {
+            gslManager.Save(saveOption);
+            confirmingSave = false;
+            saveConfirmMenu.SetActive(false);
+            saveOption = "";
             menuBleep.Play();
-            gslManager.Save("Save4");
+        }
+        if (e.target.name == "NoSave")
+        {
+            saveOption = "";
+            confirmingSave = false;
+            saveConfirmMenu.SetActive(false);
+            menuBleep.Play();
         }
 
 
@@ -507,6 +553,7 @@ public class IngameMenu : MonoBehaviour
             lengthButton.GetComponent<Renderer>().material = unselectColor;
             widthButton.GetComponent<Renderer>().material = unselectColor;
             heightButton.GetComponent<Renderer>().material = unselectColor;
+            allButton.GetComponent<Renderer>().material = unselectColor;
 
         }
         if (e.target.name == "RotateButton")
