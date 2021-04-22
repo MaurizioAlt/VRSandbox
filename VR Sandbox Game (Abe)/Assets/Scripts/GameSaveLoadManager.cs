@@ -72,7 +72,7 @@ public class GameSaveLoadManager : MonoBehaviour
     // and change saveName to fileName for the path variable
     public void Load(string saveName) 
     {
-        DestroyAllSpawnedObjectOnScene();
+        
 
         Debug.Log("GameSaveLoadManager >>> Load()");
 
@@ -110,9 +110,10 @@ public class GameSaveLoadManager : MonoBehaviour
                 {
                     spaceNotif.SetActive(true);
                 }
+                return;
             }
-
-                Debug.Log("GameSaveLoadManager >>> Load(), spanwedobject count: " + SpawnedObjectSaveData.current.spawnedObjects.Count);
+            DestroyAllSpawnedObjectOnScene();
+            Debug.Log("GameSaveLoadManager >>> Load(), spanwedobject count: " + SpawnedObjectSaveData.current.spawnedObjects.Count);
             InitializeObjects();
         }
         catch(Exception e)
