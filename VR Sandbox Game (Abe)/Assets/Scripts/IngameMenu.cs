@@ -37,11 +37,16 @@ public class IngameMenu : MonoBehaviour
     public GameObject copyButton;
     public GameObject pasteButton;
     public GameObject saveConfirmMenu;
+    public GameObject plainNotif;
+    public GameObject forestNotif;
+    public GameObject spaceNotif;
+
     private string saveOption;
     private bool confirmingSave = false;
 
     public Material selectColor;
     private Material unselectColor;
+
 
 
     public GameObject musicPlus;
@@ -692,6 +697,22 @@ public class IngameMenu : MonoBehaviour
                 VolumeScript.sfxVolume -= .05f;
                 VolumeScript.sfxVolumeInt -= 5;
             }
+            menuBleep.Play();
+        }
+
+        if (e.target.name == "OkPlain")
+        {
+            plainNotif.SetActive(false);
+            menuBleep.Play();
+        }
+        if (e.target.name == "OkForest")
+        {
+            forestNotif.SetActive(false);
+            menuBleep.Play();
+        }
+        if (e.target.name == "OkSpace")
+        {
+            spaceNotif.SetActive(false);
             menuBleep.Play();
         }
     }

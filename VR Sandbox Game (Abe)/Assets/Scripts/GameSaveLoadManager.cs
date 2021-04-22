@@ -12,11 +12,13 @@ public class GameSaveLoadManager : MonoBehaviour
     private bool isDebug = true;
     private string path;
     private string saveName;
+    public GameObject plainNotif;
+    public GameObject forestNotif;
+    public GameObject spaceNotif;
 
 
     public void Awake()
     {
-        
     }
     public void Start()
     {
@@ -96,9 +98,19 @@ public class GameSaveLoadManager : MonoBehaviour
 
             if (SceneManager.GetActiveScene().buildIndex != SpawnedObjectSaveData.current.sceneIndex)
             {
-                return;
+                if (SpawnedObjectSaveData.current.sceneIndex == 1)
+                {
+                    plainNotif.SetActive(true);
+                }
+                else if (SpawnedObjectSaveData.current.sceneIndex == 2)
+                {
+                    forestNotif.SetActive(true);
+                }
+                else if (SpawnedObjectSaveData.current.sceneIndex == 3)
+                {
+                    spaceNotif.SetActive(true);
+                }
             }
-                //SceneManager.LoadScene(SpawnedObjectSaveData.current.sceneIndex);
 
                 Debug.Log("GameSaveLoadManager >>> Load(), spanwedobject count: " + SpawnedObjectSaveData.current.spawnedObjects.Count);
             InitializeObjects();

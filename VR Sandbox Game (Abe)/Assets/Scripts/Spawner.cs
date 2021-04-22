@@ -44,7 +44,7 @@ using Valve.VR;
 
 
         //spawn object
-        if (m_SpawnObject.GetLastStateUp(m_Pose.inputSource) && spawningObject) {
+        if (m_SpawnObject.GetLastStateUp(m_Pose.inputSource) && spawningObject && m_HasPosition) {
             spawn();
         }
         if (m_SpawnObject.GetStateDown(m_Pose.inputSource) && deletingObject)
